@@ -1,0 +1,103 @@
+---
+title: "A study of various methods to teach R programming"
+output: pdf_document
+bibliography: citations.bib
+---
+
+
+## Specific Aims
+
+This study seeks to assess the impact of teaching programming in R under two paradigms, one that teaches the **tidyverse** suite of packages first, henceforth referred to as "tidyverse first", and one that teaches the **base** R conventions first, henceforth referred to as "base first". Our specific goals of the study are to:
+
+(1) Establish whether there is a relationship between the method of teaching ("tidyverse first" or "base first") and participant engagement with the material.
+(2) Establish whether there is a relationship between the method of teaching ("tidyverse first" or "base first") and participant outcomes, as established by a set of assessments given before, during, and after the intervention.
+(3) Establish whether there are subgroups of participants that benefit more from a specific teaching paradigm.
+
+## Background and Rationale
+
+The programming language R was developed by Robert Gentleman and Ross Ihaka in the early 1990's at University of Auckland, New Zealand [@ihaka1996r]. It is based on the programming language S, developed by John Chambers, Rick Becker, and Allan Wilks at Bell Laboratories [@becker1984s]. The programming language R is currently ubiquitous in the statistical research and education communities. The "tidyverse" is a suite of R packages created to help with common statistics and data science tasks that follow a consistent philosophy [@tidyverse2019; @tidyverse]. As of tidyverse 1.2.0, the core packages include ggplot2 [@wickham2016ggplot2], dplyr [@wickham2018dplyr], tidyr [@wickham2018tidyr], readr [@wickham2018readr], purrr [@wickham2018purrr], tibble [@muller2018tibble], stringr [@hadley2018stringr], and forcats [@hadley2018forcats]. Because these packages follow a consistent philosophy and were created with the user in mind, it has been speculated that it may be easier for beginners learning R to learn this suite of packages first, before learning the underlying systems of "base R". This hypothesis, while written about in informal avenues [@robinson2017; @robinson2014], has not been formally tested. While there have been a few guides with suggestions on how to teach R programming published [@venables2009introduction; @baumer2017modern; @ccetinkaya2018infrastructure; @kaplan2018teaching; @eglen2009quick; @langan2016guidance; @peterlin2009using], and a single randomized study that examines the impact of using certain paradigms to solve specific problems [@rafalski2019randomized], no studies to date have studied the impact of the order that the specific methods are taught. 
+
+## Study Design
+
+We have created two sets of online modules to teach basic skills in R programming. The online modules are intended to be completed outside the classroom. Each module is designed to take approximately 20 minutes, with total completion possible in approximately 3 hours. Participants will be randomized upon consent. Participants randomized to the "tidyverse first" set of modules will follow the following trajectory:
+
+1. Introduction to the R environment and RStudio IDE
+2. Introduction to visualizing data in R using **ggplot2** (part of the **tidyverse** suite of R packages)
+3. Introduction to tidy data using the **tidyverse**
+4. Introduction to data manipulation techniques using the **tidyverse**
+5. Reading data from files using the **tidyverse**
+6. Vectors and assignment in **base** R
+7. Lists and dataframes in **base** R
+8. Reading data from files using **base** R
+9. Visualizing data in R using **base** R
+
+Participants randomized to the "base first" set of modules will follow the following trajectory:
+
+1. Introduction to the R environment and RStudio IDE
+2. Vectors and assignment in **base** R
+3. Lists and dataframes in **base** R
+4. Reading data from files using **base** R
+5. Introduction to visualizing data in R using **base** R
+6. Introduction to tidy data using the **tidyverse** suite of R packages
+7. Introduction to data manipulation techniques using the **tidyverse** 
+8. Reading data from files using the **tidyverse**
+9. Visualizing data in R using **ggplot2** (part of the **tidyverse**)
+
+In both cases, an assessment will be given prior to the first module, after the 5th module, and after the 9th module.
+
+The modules include teaching material as well as interactive coding exercises.
+
+### Participants
+
+We hope to recruit approximately 100 participants. Initial recruitment will take place at Wake Forest University for enrollment in the spring semester of 2020. We will email departments that may have interest in their students learning R basics. Participation in the study is optional; there will not be class credit associated. It will be possible for students to use the training resources without participating in the study.
+
+### Engagement
+
+To address Aim (1) we will observe the participant's engagement with the material. We will do this by observing factors such as the responses to attempted exercises in each module and time spent in each module.
+
+### Assessments
+
+The assessments to address Aim (2) and Aim (3) will include two parts:
+ (1) evaluations of the learning objectives  
+ (2) the participants' perception of their learning / potential for growth.
+ 
+We will evaluate the participants' learning by observing:
+
+* the code used in the attempted exercises embedded in each module
+* performance on assessment items written to target specific learning objectives
+
+In addition to evaluating whether the learning objectives are met, we will also evaluate the participant's perception of their learning / growth potential by asking how competent they feel in the language (R), how likely do they think it is that they will master the language eventually, and how much they are enjoying the learning process.
+
+### Variables collected
+
+In addition to the assessments completed, which include questions to assess the learning objectives as well as questions to assess the participant's perception of their learning / growth potential, we will collect demographics including:
+
+ * age
+ * gender
+ * education attainment
+ * first language 
+ * primary language (reading)
+ * previous programming experience (general)
+ * previous programming experience (R specific)
+ * previous data experience
+
+## Timeline
+
+Pending approval, the initial recruitment email to departments will go out in December 2019. The modules will go live in January 2020. For this first phase, data will be collected from January 2020 through May 2020.
+
+## Funding
+
+We are applying for seed funding from Wake Forest University's Center for the Advancement of Learning. The funding will be used to host the modules and data on a server.
+
+## Budget
+
+Item | Cost | Total
+-----|------|-----
+[Shiny Server (Standard)](https://www.shinyapps.io) | \$99 / month for 4 months | \$ 396
+Domain | \$144 for the year | \$144
+Incentives | \$400 | \$400
+**Total** | | **\$940**
+
+
+
+## References
