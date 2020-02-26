@@ -1,0 +1,40 @@
+---
+title: "Learn R"
+output: 
+  learnr::tutorial:
+     progressive: true
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+library(tibble)
+library(jsonlite)
+tutorial_options(exercise.checker = gradethis::grade_learnr)
+tutorial_event_recorder <- function(tutorial_id, tutorial_version, user_id, 
+                                    event, data) {
+  t <- tibble(
+    time = Sys.time(),
+    tutorial_id = tutorial_id,
+    tutorial_version = tutorial_version,
+    user_id = user_id,
+    event = event,
+    data = list(data)
+  )
+ # print(toJSON(t))
+}
+options(tutorial.event_recorder = tutorial_event_recorder)
+
+```
+
+```{r child = "base-vectors.Rmd"}
+```
+
+```{r child = "base-list-data-frame.Rmd"}
+```
+
+```{r child = "base-manipulating-data.Rmd"}
+```
+
