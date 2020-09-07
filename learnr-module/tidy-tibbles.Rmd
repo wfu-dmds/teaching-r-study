@@ -1,0 +1,231 @@
+## Tidy data frames
+
+The [tidyverse](https://tidyverse.tidyverse.org/articles/paper.html) is a collection of R packages that help solve data science challenges. This collection of packages share the same design philosophy, grammar, and data structures. You can install the collection of tidyverse packages in R by running `install.packages("tidyverse")` in the console. To attach the packges within an R session, run the following:
+
+```{r, eval = FALSE}
+library(tidyverse)
+```
+
+Within the tidyverse paradigm, the main data structure of interest is the **tibble**. A **tibble** is a data frame with specific default behavior. 
+
+Broadly, tibbles consist of _rows_ and _columns_, where the length of the _rows_ is consistent for all _columns_. For example, here is a tibble with two columns, `x` and `y`, each with three rows.
+
+```{r}
+tibble(
+  x = c(1, 2, 3),
+  y = c(4, 5, 6)
+)
+```
+
+
+#### Exercise
+
+Create a tibble using the `tibble()` function consisting of two variables, `x` and `y`, detailed below.
+
+```{r tibble, exercise = TRUE}
+x <- c(1, 2, 3)
+y <- c("do", "re", "mi")
+```
+
+```{r tibble-check}
+x <- c(1, 2, 3)
+y <- c("do", "re", "mi")
+grade_result(
+  pass_if(~ identical(.result, tibble(x = x, y = y)))
+)
+```
+
+### Variable classes
+
+Each column in a tibble has a specific _class_. 
+
+Common column classes include:
+
+class | definition | example
+------|------------|------
+double (numeric) | double-precision floating point number | `1.5`
+integer (numeric) | whole number | `1L`
+logical | logical constant, either TRUE or FALSE  | `TRUE`
+character | a character string | `"this is a string"`
+list | an ordered collection of _components_ that can be of different modes and types | `list(1, "two", 3)`
+
+Every element in the column must belong to the same class. For example, here is a tibble with
+
+```{r}
+tibble(
+  numeric = 1:5,
+  logical = TRUE,
+  character = LETTERS[1:5]
+)
+```
+
+Notice here the class of the column is printed below the variable name. The first column `numeric` is an integer, as indicated by `int`. The second column `logical` is logical, as indicated by `lgl`. The third column `character` is a character string, as indicated by `chr`. Also notice that even though `TRUE` was only entered once, it is repeated 5 times to match the length of the other columns. Tibbles will automatically recycle inputs of length 1.
+
+```{r}
+tibble(
+  a = c(1, 2, 3),
+  b = c("one", "two", "three"),
+  c = list("one", 2, "three")
+)
+```
+
+```{r tib-type1, echo = FALSE}
+question("**In the tibble ablove, what is the class for variable `a`**",
+  answer("double", correct = TRUE),
+  answer("intever"),
+  answer("logical"),
+  answer("character"),
+  answer("list")
+)
+```
+
+```{r tib-type2, echo = FALSE}
+question("**In the tibble ablove, what is the class for variable `b`**",
+  answer("double"),
+  answer("intever"),
+  answer("logical"),
+  answer("character", correct = TRUE),
+  answer("list")
+)
+```
+
+```{r tib-type3, echo = FALSE}
+question("**In the tibble ablove, what is the class for variable `c`**",
+  answer("double"),
+  answer("intever"),
+  answer("logical"),
+  answer("character"),
+  answer("list", correct = TRUE)
+)
+```
+
+### Saving tibbles
+
+You can save a tibble locally during an R session by _assigning_ it to a name using `<-`. For example, the code below assigns the tibble to `df`.
+
+```{r}
+df <- tibble(
+  numeric = 1:5,
+  logical = TRUE,
+  character = LETTERS[1:5]
+)
+```
+
+#### Exercise
+
+Create a tibble from the two vectors below, `x` and `y`. Assign this tibble to `dat`.
+
+```{r assign-tib, exercise = TRUE}
+x <- c(8, 6, 7)
+y <- c(5, 3, 0)
+
+```
+
+```{r assign-tib-solution}
+dat <- tibble(
+  x = c(8, 6, 7),
+  y = c(5, 3, 0)
+)
+```
+
+
+### Subsetting tibbles
+
+You can _subset_ a tibble by using a single square bracket `[row(s), column(s)]`, indicating the rows and columns you'd like to keep by number, or using the double square bracket, `[[column]]` to extract a single column, indicated by name or by position. For example below, if I wanted to subset `df` to only contain rows 1 and 2 and column 3, I would use the single square bracket as follows.
+
+```{r}
+df[c(1, 2), 3]
+```
+
+Alternatively, I could use the double square brackets to extract the `character` column and output just the values. The code below does this by _name_.
+
+```{r}
+df[["character"]]
+```
+
+Equivalently, I can do this by _position_, since `character` is the third column in the `df` tibble.
+
+```{r}
+df[[3]]
+```
+
+#### Exercise
+
+Subset the tibble below to only contain the 1st and 3rd rows and the 2nd and 4th columns.
+
+```{r subset-tibble, exercise = TRUE}
+df <- tibble(
+  a = 1:4,
+  b = 5:8,
+  c = c("a", "b", "c", "d"),
+  d = c(TRUE, FALSE, TRUE, FALSE)
+)
+
+```
+
+```{r subset-tibble-check}
+df <- tibble(
+  a = 1:4,
+  b = 5:8,
+  c = c("a", "b", "c", "d"),
+  d = c(TRUE, FALSE, TRUE, FALSE)
+)
+grade_result(
+  pass_if(~ identical(.result, df[c(1, 3), c(2, 4)]))
+)
+```
+
+```{r subset-tibble-solution}
+df <- tibble(
+  a = 1:4,
+  b = 5:8,
+  c = c("a", "b", "c", "d"),
+  d = c(TRUE, FALSE, TRUE, FALSE)
+)
+df[c(1, 3), c(2, 4)]
+```
+
+Extract the 3rd column from the tibble below.
+
+```{r tibble-extract, exercise = TRUE}
+df <- tibble(
+  a = 1:4,
+  b = 5:8,
+  c = c("a", "b", "c", "d"),
+  d = c(TRUE, FALSE, TRUE, FALSE)
+)
+
+```
+
+```{r tibble-extract-check}
+df <- tibble(
+  a = 1:4,
+  b = 5:8,
+  c = c("a", "b", "c", "d"),
+  d = c(TRUE, FALSE, TRUE, FALSE)
+)
+
+grade_result(
+  pass_if(~ identical(.result, df[[3]]))
+)
+```
+
+```{r tibble-extract-solution}
+df <- tibble(
+  a = 1:4,
+  b = 5:8,
+  c = c("a", "b", "c", "d"),
+  d = c(TRUE, FALSE, TRUE, FALSE)
+)
+
+df[[3]]
+
+# or
+
+df[["c"]]
+```
+
+
+
+
+

@@ -1,0 +1,272 @@
+
+```{r, echo = FALSE}
+question_ui_completed.no_mark <- function(question, value, ...) {
+  choice_values <- learnr:::answer_values(question)
+  disable_all_tags(
+    radioButtons(
+      question$ids$answer,
+      label = question$question,
+      choiceValues = choice_values,
+      choiceNames = learnr:::answer_labels(question),
+      selected = value
+    )
+  )
+}
+
+question_ui_completed.gender <- function(question, value, ...) {
+  choice_values <- learnr:::answer_values(question)
+  if (value == "Prefer to self describe") {
+    textInput(question$ids$answer, label = question$question, 
+              placeholder = "Self describe gender", value = "")
+  } else {
+    disable_all_tags(
+      radioButtons(
+        question$ids$answer,
+        label = question$question,
+        choiceValues = choice_values,
+        choiceNames = learnr:::answer_labels(question),
+        selected = value
+      )
+    )
+  }
+}
+
+question_ui_completed.other <- function(question, value, ...) {
+  choice_values <- learnr:::answer_values(question)
+  if (value == "Other (please specify)") {
+    textInput(question$ids$answer, label = question$question, 
+              placeholder = "Other, please specify", value = "")
+  } else {
+    disable_all_tags(
+      radioButtons(
+        question$ids$answer,
+        label = question$question,
+        choiceValues = choice_values,
+        choiceNames = learnr:::answer_labels(question),
+        selected = value
+      )
+    )
+  }
+}
+
+question_ui_initialize.numeric <- function(question, value, ...) {
+  choice_names <- learnr:::answer_labels(question)
+  choice_values <- learnr:::answer_values(question)
+  numericInput(question$id$answer, label = question$question,
+               value = NA,
+               min = min(as.numeric(choice_values)),
+               max = max(as.numeric(choice_values)))
+}
+
+question_ui_completed.numeric <- function(question, value, ...) {
+  disable_all_tags(
+    numericInput(question$id$answer,
+                 label = question$question,
+                 value = value
+    )
+  )
+}
+question_is_correct.always_correct <- function(question, value, ...) {
+  return(mark_as(TRUE, message = NULL))
+}
+
+question_ui_initialize.dropdown <- function(question, value, ...) {
+  choice_names <- learnr:::answer_labels(question)
+  choice_values <- learnr:::answer_values(question)
+  selectInput(question$id$answer, label = question$question,
+              choices = choice_names)
+}
+
+question_ui_completed.dropdown <- function(question, value, ...) {
+  choice_names <- learnr:::answer_labels(question)
+  disable_all_tags(
+    selectInput(question$id$answer,
+                label = question$question,
+                choices = choice_names, 
+                selected = value
+    )
+  )
+}
+
+question_ui_completed.dropdown_other <- function(question, value, ...) {
+  choice_names <- learnr:::answer_labels(question)
+  if (value == "Other (please specify)") {
+    textInput(question$ids$answer, label = question$question, 
+              placeholder = "Other, please specify", value = "")
+  } else {
+    disable_all_tags(
+      selectInput(question$id$answer,
+                  label = question$question,
+                  choices = choice_names, 
+                  selected = value
+      )
+    )
+  }
+}
+
+question_ui_initialize.text_area <- function(question, value, ...) {
+  textAreaInput(question$id$answer, label = question$question)
+}
+
+question_ui_completed.text_area <- function(question, value, ...) {
+  disable_all_tags(
+    textAreaInput(question$id$answer,
+                  label = question$question)
+  )
+}
+
+
+```
+
+
+### 1. What is your age (in years)?
+
+```{r q1, echo = FALSE}
+question(
+  "1. What is your age (in years)?",
+  answer("18", correct = TRUE),
+  answer("120", correct = TRUE),
+  type = c("always_correct", "numeric"),
+  correct = "Submitted",
+  allow_retry = TRUE)
+```
+
+
+```{r q2, echo = FALSE}
+question(
+  "2. Which best describes your gender?",
+  answer("Female", correct = TRUE),
+  answer("Male", correct = TRUE),
+  answer("Prefer not to say", correct = TRUE),
+  answer("Prefer to self describe", correct = TRUE),
+  type = c("gender", "learnr_radio"),
+  correct = "Submitted",
+  allow_retry = TRUE
+)
+```
+
+```{r q3, echo = FALSE}
+question(
+  "3. What is the highest level of education you have completed?",
+  answer("Did not attend high school", correct = TRUE),
+  answer("Some high school", correct = TRUE),
+  answer("High school graduate", correct = TRUE),
+  answer("Some college", correct = TRUE),
+  answer("Some postgraduate work", correct = TRUE),
+  answer("Postgraduate degree", correct = TRUE),
+  type = c("no_mark", "learnr_radio"),
+  correct = "Submitted",
+  allow_retry = TRUE
+)
+```
+
+```{r q4, echo = FALSE}
+question(
+  "4. What was your first language?",
+  answer("Arabic", correct = TRUE),
+  answer("Armenian", correct = TRUE),
+  answer("Chinese", correct = TRUE),
+  answer("English", correct = TRUE),
+  answer("French", correct = TRUE),
+  answer("French Creole", correct = TRUE),
+  answer("German", correct = TRUE),
+  answer("Greek", correct = TRUE),
+  answer("Gujarati", correct = TRUE),
+  answer("Hindi", correct = TRUE),
+  answer("Italian", correct = TRUE),
+  answer("Japanese", correct = TRUE),
+  answer("Korean", correct = TRUE),
+  answer("Persian", correct = TRUE),
+  answer("Polish", correct = TRUE),
+  answer("Portuguese", correct = TRUE),
+  answer("Russian", correct = TRUE),
+  answer("Spanish", correct = TRUE),
+  answer("Tagalog", correct = TRUE),
+  answer("Urdu", correct = TRUE),
+  answer("Vietnamese", correct = TRUE),
+  answer("Other (please specify)", correct = TRUE),
+  type = c("always_correct", "dropdown_other", "dropdown"),
+  correct = "Submitted",
+  allow_retry = TRUE
+)
+```
+
+```{r q5, echo = FALSE}
+question(
+  "5. In what language to you read most often?",
+  answer("Arabic", correct = TRUE),
+  answer("Armenian", correct = TRUE),
+  answer("Chinese", correct = TRUE),
+  answer("English", correct = TRUE),
+  answer("French", correct = TRUE),
+  answer("French Creole", correct = TRUE),
+  answer("German", correct = TRUE),
+  answer("Greek", correct = TRUE),
+  answer("Gujarati", correct = TRUE),
+  answer("Hindi", correct = TRUE),
+  answer("Italian", correct = TRUE),
+  answer("Japanese", correct = TRUE),
+  answer("Korean", correct = TRUE),
+  answer("Persian", correct = TRUE),
+  answer("Polish", correct = TRUE),
+  answer("Portuguese", correct = TRUE),
+  answer("Russian", correct = TRUE),
+  answer("Spanish", correct = TRUE),
+  answer("Tagalog", correct = TRUE),
+  answer("Urdu", correct = TRUE),
+  answer("Vietnamese", correct = TRUE),
+  answer("Other (please specify)", correct = TRUE),
+  type = c("always_correct", "dropdown_other", "dropdown"),
+  correct = "Submitted",
+  allow_retry = TRUE
+)
+```
+
+```{r q6, echo = FALSE}
+question(
+  "6. Have you ever learned a programming language?",
+  answer("Yes", correct = TRUE),
+  answer("No", correct = TRUE),
+  type = c("no_mark", "learnr_radio"),
+  correct = "Submitted",
+  allow_retry = TRUE)
+```
+
+```{r q7, echo = FALSE}
+question(
+  "7. If yes (6), which language(s) and how many years have you been using each language?",
+  answer("Yes", correct = TRUE),
+  type = c("always_correct", "text_area"),
+  correct = "Submitted",
+  allow_retry = TRUE)
+```
+
+
+```{r q8, echo = FALSE}
+question(
+  "8. Have you ever learned to program in R?",
+  answer("Yes", correct = TRUE),
+  answer("No", correct = TRUE),
+  type = c("no_mark", "learnr_radio"),
+  correct = "Submitted",
+  allow_retry = TRUE)
+```
+
+
+
+
+9. If yes (8), how many years have you been using R?
+
+```{r q10, echo = FALSE}
+question(
+  "10. Have you ever completed a data analysis?",
+  answer("Yes", correct = TRUE),
+  answer("No", correct = TRUE),
+  type = c("no_mark", "learnr_radio"),
+  correct = "Submitted",
+  allow_retry = TRUE)
+```
+
+11. If yes, approximately how many data analyses have you completed?
+
+

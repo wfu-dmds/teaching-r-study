@@ -1,0 +1,52 @@
+## Reading data
+
+You can read data into R using `read.*()` functions. These include:
+
+* `read.csv()`: Reads in `.csv` files by default
+* `read.delim()`: Reads in tab-delimited files by default
+
+The first argument of each of these functions is the `file`, the name of the file where the data are to be read from. 
+
+For example, we have a file `sleep.csv` in a folder called `data` that contains data on the effect of two drugs on 10 patients' sleep.
+
+```
+"extra","group","ID"
+ 0.7,   "1",    "1"
+-1.6,   "1",    "2"
+-0.2,   "1",    "3"
+-1.2,   "1",    "4"
+-0.1,   "1",    "5"
+.        .       . 
+.        .       . 
+.        .       . 
+```
+
+```{r}
+read.csv(file = "data/sleep.csv")
+```
+
+We can save this data frame to an object in R using the assignment operator, `<-`
+
+```{r}
+sleep_data <- read.csv(file = "data/sleep.csv")
+```
+
+### Exercise
+
+Read in the csv located at `data/airquality.csv` into R.
+
+```{r csv, exercise = TRUE}
+
+```
+
+```{r csv-check}
+grade_result(
+  pass_if(~ identical(.result, read.csv("data/airquality.csv")))
+)
+```
+
+
+
+
+
+

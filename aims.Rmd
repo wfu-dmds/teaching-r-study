@@ -19,37 +19,33 @@ The programming language R was developed by Robert Gentleman and Ross Ihaka in t
 
 ## Study Design
 
-We have created two sets of online modules to teach basic skills in R programming. The online modules are intended to be completed outside the classroom. Each module is designed to take approximately 20 minutes, with total completion possible in approximately 3 hours. Participants will be randomized upon consent. Participants randomized to the "tidyverse first" set of modules will follow the following trajectory:
+We have created two sets of online modules to teach basic skills in R programming. The online modules are intended to be completed outside the classroom. Each module is designed to take approximately 15 minutes, with total completion possible in approximately 1.5 hours. Participants will be randomized upon consent. Participants randomized to the "tidyverse first" set of modules will follow the following trajectory:
 
-1. Introduction to the R environment and RStudio IDE
-2. Introduction to visualizing data in R using **ggplot2** (part of the **tidyverse** suite of R packages)
-3. Introduction to tidy data using the **tidyverse**
-4. Introduction to data manipulation techniques using the **tidyverse**
-5. Reading data from files using the **tidyverse**
-6. Vectors and assignment in **base** R
-7. Lists and dataframes in **base** R
-8. Reading data from files using **base** R
-9. Visualizing data in R using **base** R
+
+
+1. Introduction to tibbles and column types using the **tidyverse**
+2. Reading in data using the **tidyverse**
+3. Introduction to data manipulation techniques using the **tidyverse**
+4. Introduction to vectors, assignment, lists, and dataframes in **base** R
+5. Reading in data using **base** R
+6. Introduction to data manipulation techniques using **base** R
 
 Participants randomized to the "base first" set of modules will follow the following trajectory:
 
-1. Introduction to the R environment and RStudio IDE
-2. Vectors and assignment in **base** R
-3. Lists and dataframes in **base** R
-4. Reading data from files using **base** R
-5. Introduction to visualizing data in R using **base** R
-6. Introduction to tidy data using the **tidyverse** suite of R packages
-7. Introduction to data manipulation techniques using the **tidyverse** 
-8. Reading data from files using the **tidyverse**
-9. Visualizing data in R using **ggplot2** (part of the **tidyverse**)
+1. Introduction to vectors, assignment, lists, and dataframes in **base** R
+2. Reading in data using **base** R
+3. Introduction to data manipulation techniques using **base** R
+4. Introduction to tibbles and column types using the **tidyverse**
+5. Reading in data using the **tidyverse**
+6. Introduction to data manipulation techniques using the **tidyverse**
 
-In both cases, an assessment will be given prior to the first module, after the 5th module, and after the 9th module.
+In both cases, an assessment will be given prior to the first module, after the 3rd module, and after the 6th module.
 
 The modules include teaching material as well as interactive coding exercises.
 
 ### Participants
 
-We hope to recruit approximately 100 participants. Initial recruitment will take place at Wake Forest University for enrollment in the spring semester of 2020. We will email departments that may have interest in their students learning R basics. Participation in the study is optional; there will not be class credit associated. It will be possible for students to use the training resources without participating in the study.
+We hope to recruit approximately 100 participants. Initial recruitment will take place in Summer 2020. We will recruit participants via social media and email. Participation in the study is optional; there will not be class credit associated. 
 
 ### Engagement
 
@@ -83,11 +79,11 @@ In addition to the assessments completed, which include questions to assess the 
 
 ## Timeline
 
-Pending approval, the initial recruitment email to departments will go out in December 2019. The modules will go live in January 2020. For this first phase, data will be collected from January 2020 through May 2020.
+Pending approval, the initial recruitment email to departments will begin in May 2020. The modules will go live in May 2020. For this first phase, data will be collected from May 2020 through December 2020.
 
 ## Funding
 
-We are applying for seed funding from Wake Forest University's Center for the Advancement of Learning. The funding will be used to host the modules and data on a server.
+We have received seed funding from Wake Forest University's Center for the Advancement of Learning. The funding will be used for incentives.
 
 ## Budget
 
@@ -95,8 +91,8 @@ Item | Cost | Total
 -----|------|-----
 [Shiny Server (Standard)](https://www.shinyapps.io) | \$99 / month for 4 months | \$ 396
 Domain | \$144 for the year | \$144
-Incentives | \$400 | \$400
-**Total** | | **\$940**
+Incentives | \$800 | \$800
+**Total** | | **\$1340**
 
 
 
