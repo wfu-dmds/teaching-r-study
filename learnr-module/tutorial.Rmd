@@ -55,6 +55,15 @@ options(tutorial.event_recorder = tutorial_event_recorder)
 
 ```
 
+```{r, context="server"}
+
+# get the default user ID used by the learnr module
+userID <- unname(Sys.info()["user"])
+# save the user ID
+saveRDS(userID, file = "userID.Rds")
+
+```
+
 ```{r child = "introduction.Rmd"}
 ```
 
