@@ -1,0 +1,97 @@
+---
+title: "Introduction to R"
+output: 
+  learnr::tutorial:
+     progressive: true
+runtime: shiny_prerendered
+params:
+  jdtrat: true
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+# library(gradethis)
+library(tidyverse)
+library(rdrop2)
+library(glue)
+
+# drop_auth(rdstoken = "droptoken.rds")
+
+
+
+# tutorial_options(exercise.checker = gradethis::grade_learnr)
+
+tutorial_event_recorder <- function(tutorial_id, tutorial_version, user_id, 
+                                    event, data) {
+  if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+    drop_download(path = glue("teaching-r-study/data_{user_id}.rds"), 
+                  local_path = glue("data_{user_id}.rds"),
+                  overwrite = TRUE)
+    t <- readRDS(glue("data_{user_id}.rds"))
+  } else {
+    t <- tibble(
+      time = .POSIXct(numeric(0)),
+      tutorial_id = character(),
+      tutorial_version = character(),
+      user_id = character(),
+      event = character(),
+      data = list())
+    
+  }
+  t <- bind_rows(t,
+                 tibble(
+                   time = Sys.time(),
+                   tutorial_id = tutorial_id,
+                   tutorial_version = tutorial_version,
+                   user_id = user_id,
+                   event = event,
+                   data = list(data)
+                 )
+  )
+  saveRDS(t, file = glue("data_{user_id}.rds"))
+  drop_upload(file = glue("data_{user_id}.rds"),
+              path = glue("teaching-r-study"))
+}
+options(tutorial.event_recorder = tutorial_event_recorder)
+
+```
+
+```{r child = "introduction.Rmd"}
+```
+
+```{r, context="server"}
+
+# get the default user ID used by the learnr module
+userID <- unname(Sys.info()["user"])
+# save the user ID
+saveRDS(userID, file = "userID.Rds")
+
+```
+
+<!-- ```{r child = "assessment.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "base-vectors.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "base-reading-data.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "base-manipulating-data.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "assessment2.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "tidy-tibbles.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "tidy-reading-data.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "tidy-manipulating-data.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "assessment3.Rmd"} -->
+<!-- ``` -->
