@@ -66,9 +66,15 @@ pander(head(sample))
 
 # nest the sample data
 # replace any NA with "placeholder"
+# I've added the question_number but there has to be a better way to do this...
 nestedSample <- sample %>% 
   mutate(option = replace_na(option, "placeholder")) %>%
   group_by(question) %>%
+  nest() %>%
+  ungroup() %>%
+  mutate(question_number = row_number(), .before = question) %>%
+  unnest(data) %>%
+  group_by(question_number) %>%
   nest() %>%
   ungroup()
 
@@ -113,42 +119,41 @@ Q2 <- rlang::expr(
 
 ```
 
-```{r make functional, eval = FALSE}
+```{r make functional, eval = TRUE}
 
 
 ### First draft to automate this process.
+# defaultNumeric is default value for number stuff
+# I want to pass optional argumens -- how to?
+getUICode <- function(df, defaultNumeric = 25) {
 
-getUICode <- function(df) {
-
-  inputType <- unique(df$input_type)
+  inputType <- base::unique(df$input_type)
 
   if (inputType ==  "select") {
-  output <- rlang::expr(
+  output <- 
     pickerInput(
-      inputId = eval(unique(df$label)),
-      label = eval(unique(df$label)),
+      inputId = base::unique(df$label),
+      label = base::unique(df$question),
       choices = df$option,
       options = list(
       title = "Placeholder")
       )
-    )
   } else if (inputType == "numeric") {
     
-    output <- rlang::enexpr(
+    output <- 
       numericInputIcon(
-          inputId = eval(unique(df$label)),
-          label = eval(unique(df$label)),
-          value = default,
+          inputId = base::unique(df$label),
+          label = base::unique(df$question),
+          value = defaultNumeric,
           icon = list(
-            eval(unique(df$label))
+            base::paste0(base::toupper(base::substring(base::unique(df$label), 1,1)), 
+                         base::tolower(base::substring(base::unique(df$label), 2)))
             )
       )
-    )
   }
-  return(output)
+  
+  return(list(output))
 }
-
-x <- getUICode(firstLang)
 
 
 #' Create different input UIs based on questions.
@@ -183,6 +188,8 @@ getInput <- function(df) {
 # walk(demList, ~eval(.x))
 
 
+allQs <- map(nestedSample$data, ~getUICode(.x))
+
 ```
 
 ```{r, echo=FALSE}
@@ -191,8 +198,7 @@ shinyApp(
 
   ui = fluidPage(
     textInput("userID", "Enter your username."),
-    eval(Q1),
-    eval(Q2),
+    allQs,
     actionBttn("submit", "Submit"),
     
   ),
