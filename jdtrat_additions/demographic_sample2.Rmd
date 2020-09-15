@@ -104,6 +104,7 @@ getUICode <- function(df, defaultNumeric = 25) {
           label = base::unique(df$question),
           value = defaultNumeric,
           icon = list(
+            #make the df$label sentence case in base R
             base::paste0(base::toupper(base::substring(base::unique(df$label), 1,1)), 
                          base::tolower(base::substring(base::unique(df$label), 2)))
             )
