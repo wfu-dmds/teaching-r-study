@@ -1,0 +1,152 @@
+---
+title: "Demographic Question Code 2"
+author: "Jonathan Trattner"
+date: "9/15/2020"
+output: 
+  html_document:
+    fig.width: 7
+    fig.asp: 0.718
+    df_print: paged
+    toc: true
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    theme: journal
+    highlight: monochrome
+    code_folding: hide
+runtime: shiny
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(readr)
+library(tidyr)
+library(tibble)
+library(shinyWidgets)
+library(fs)
+library(purrr)
+library(pander)
+library(rlang)
+
+
+# I created a local directory
+outputDir <- "storeDemographics"
+
+# function based on Dean Attali's post about persistent data storage
+# https://shiny.rstudio.com/articles/persistent-data-storage.html
+saveData <- function(data, userID) {
+  
+  # Create a unique file name
+  fileName <- base::sprintf("%s_%s.csv", userID, base::as.integer(base::Sys.time()))
+  
+  # Write the file to the local system
+  readr::write_csv(data,
+                   path = base::file.path(outputDir, fileName))
+}
+
+```
+
+I think the question demographics should have the following structure. Four columns: 
+
+1. `question`: The demographic question to ask. 
+2. `option`: For questions that have options (like multiple choice or select questions), those values would go in thsi column. If the answers are not discrete variables, then there would be an NA which would get changed into "placeholder." 
+3. `input_type`: This describes the input type. For example, "numeric" would create a `numericInput`, "select" would create a `pickerInput` (from shinyWidgets package), etc.
+4. `label`: This becomes the column name when the data is saved. It also serves as the `id` for Shiny inputs (as in `input$`.
+
+```{r read data, eval = TRUE, message = FALSE, warning = FALSE}
+
+# read in local file
+sample <- readr::read_csv('sampleDemographics.csv')
+pander(head(sample))
+
+# nest the sample data
+# replace any NA with "placeholder"
+# I've added the question_number but there has to be a better way to do this...
+nestedSample <- sample %>% 
+  mutate(option = replace_na(option, "placeholder")) %>%
+  group_by(question) %>%
+  nest() %>%
+  ungroup() %>%
+  mutate(question_number = row_number(), .before = question) %>%
+  unnest(data) %>%
+  group_by(question_number) %>%
+  nest() %>%
+  ungroup()
+
+```
+
+```{r make functional, eval = TRUE}
+
+### First draft to automate this process.
+# defaultNumeric is default value for number stuff
+# I want to pass optional argumens -- how to?
+getUICode <- function(df, defaultNumeric = 25) {
+
+  inputType <- base::unique(df$input_type)
+
+  if (inputType ==  "select") {
+  output <- 
+    pickerInput(
+      inputId = base::unique(df$label),
+      label = base::unique(df$question),
+      choices = df$option,
+      options = list(
+      title = "Placeholder")
+      )
+  } else if (inputType == "numeric") {
+    
+    output <- 
+      numericInputIcon(
+          inputId = base::unique(df$label),
+          label = base::unique(df$question),
+          value = defaultNumeric,
+          icon = list(
+            base::paste0(base::toupper(base::substring(base::unique(df$label), 1,1)), 
+                         base::tolower(base::substring(base::unique(df$label), 2)))
+            )
+      )
+  }
+  
+  return(list(output))
+}
+
+allQs <- map(nestedSample$data, ~getUICode(.x))
+
+```
+
+```{r, echo=FALSE}
+
+shinyApp(
+
+  ui = fluidPage(
+    textInput("userID", "Enter your username."),
+    allQs,
+    actionBttn("submit", "Submit"),
+    
+  ),
+
+  server = function(input, output, session) {
+    
+    #access session client data -- url port. I'm not sure if this is unique for each visitor with shinyapps.io. I'm including userID just for reference now.
+    user_id <- reactive({paste0(input$userID, session$clientData$url_port)})
+    
+    # The input$first_language is hard coded. I'm not sure how to change that.
+    # It should be something like `eval(unique(firstLang$label))`
+    formData <- reactive({
+      data <- tibble::tribble(~userID, ~language,
+                      input$userID, input$first_language)
+      data
+    })
+    
+    observeEvent(input$submit, {saveData(data = formData(), userID = user_id())})
+    
+    },
+
+  options = list(height = 500)
+)
+
+
+```
