@@ -72,6 +72,8 @@ nestedSample <- sample %>%
   ungroup() %>%
   mutate(question_number = row_number(), .before = question) %>%
   unnest(data) %>%
+  ## Remove this when you figure out dependence !
+  filter(is.na(dependence)) %>%
   group_by(question_number) %>%
   nest() %>%
   ungroup()
@@ -109,9 +111,34 @@ getUICode <- function(df, defaultNumeric = 25) {
                          base::tolower(base::substring(base::unique(df$label), 2)))
             )
       )
+    
+  } else if (inputType == "mc") {
+    
+    output <- 
+      radioButtons(
+        inputId = base::unique(df$label),
+        label = base::unique(df$question),
+        choices = df$option
+)
+  } else if (inputType == "text") {
+    
+    output <- 
+       textInput(inputId = base::unique(df$label), 
+                 label = base::unique(df$question), 
+                 value = df$option)
+    
+  } else if (inputType == "y/n") {
+    
+    output <- 
+     radioButtons(
+        inputId = base::unique(df$label),
+        label = base::unique(df$question),
+        choices = df$option
+)
   }
   
   return(list(output))
+  
 }
 
 allQs <- map(nestedSample$data, ~getUICode(.x))

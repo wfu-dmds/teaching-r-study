@@ -1,22 +1,55 @@
-﻿question,option,input_type,label
-What's your age?,NA,numeric,age
-What was your first language?,Arabic,select,first_language
-What was your first language?,Armenian,select,first_language
-What was your first language?,Chinese,select,first_language
-What was your first language?,English,select,first_language
-What was your first language?,French,select,first_language
-What was your first language?,Creole,select,first_language
-What was your first language?,German,select,first_language
-What was your first language?,Greek,select,first_language
-What was your first language?,Gujarati,select,first_language
-What was your first language?,Hebrew,select,first_language
-What was your first language?,Hindi,select,first_language
-What was your first language?,Italian,select,first_language
-What was your first language?,Japanese,select,first_language
-What was your first language?,Other,select,first_language
-What is the highest level of education you have attained?,Did not attend high school,select,education_attained
-What is the highest level of education you have attained?,Some high school,select,education_attained
-What is the highest level of education you have attained?,High school graduate,select,education_attained
-What is the highest level of education you have attained?,Some college,select,education_attained
-What is the highest level of education you have attained?,College,select,education_attained
-What is the highest level of education you have attained?,Graduate Work,select,education_attained
+question,option,input_type,label,dependence,dependence_value
+What's your age?,25,numeric,age,,
+Which best describes your gender?,Female,mc,gender,,
+Which best describes your gender?,Male,mc,gender,,
+Which best describes your gender?,Prefer not to say,mc,gender,,
+Which best describes your gender?,Prefer to self describe,mc,gender,,
+Which best describes your gender?,NA,text,self_describe_gender,gender,Prefer to self describe
+What is the highest level of education you have attained?,Did not attend high school,select,education_attained,,
+What is the highest level of education you have attained?,Some high school,select,education_attained,,
+What is the highest level of education you have attained?,High school graduate,select,education_attained,,
+What is the highest level of education you have attained?,Some college,select,education_attained,,
+What is the highest level of education you have attained?,College,select,education_attained,,
+What is the highest level of education you have attained?,Graduate Work,select,education_attained,,
+What was your first language?,Arabic,select,first_language,,
+What was your first language?,Armenian,select,first_language,,
+What was your first language?,Chinese,select,first_language,,
+What was your first language?,English,select,first_language,,
+What was your first language?,French,select,first_language,,
+What was your first language?,Creole,select,first_language,,
+What was your first language?,German,select,first_language,,
+What was your first language?,Greek,select,first_language,,
+What was your first language?,Gujarati,select,first_language,,
+What was your first language?,Hebrew,select,first_language,,
+What was your first language?,Hindi,select,first_language,,
+What was your first language?,Italian,select,first_language,,
+What was your first language?,Japanese,select,first_language,,
+What was your first language?,Other,select,first_language,,
+What was your first language?,NA,text,first_language_other,first_language,Other
+In what language do you read most often?,Arabic,select,read_language,,
+In what language do you read most often?,Armenian,select,read_language,,
+In what language do you read most often?,Chinese,select,read_language,,
+In what language do you read most often?,English,select,read_language,,
+In what language do you read most often?,French,select,read_language,,
+In what language do you read most often?,Creole,select,read_language,,
+In what language do you read most often?,German,select,read_language,,
+In what language do you read most often?,Greek,select,read_language,,
+In what language do you read most often?,Gujarati,select,read_language,,
+In what language do you read most often?,Hebrew,select,read_language,,
+In what language do you read most often?,Hindi,select,read_language,,
+In what language do you read most often?,Italian,select,read_language,,
+In what language do you read most often?,Japanese,select,read_language,,
+In what language do you read most often?,Other,select,read_language,,
+In what language do you read most often?,NA,text,read_language_other,read_language,Other
+Have you ever learned to program in R?,Yes,y/n,learned_r,,
+Have you ever learned to program in R?,No,y/n,learned_r,,
+"If yes, how many years have you been using R?",5,numeric,years_using_r,learned_r,Yes
+Have you ever learned a programming language (other than R)?,Yes,y/n,learned_programming_not_r,,
+Have you ever learned a programming language (other than R)?,No,y/n,learned_programming_not_r,,
+"If yes, which language(s) and how many years have you been using each language?",5,numeric,years_programming_not_r,learned_programming_not_r,Yes
+Have you ever completed a data analysis?,Yes,y/n,completed_data_analysis,,
+Have you ever completed a data analysis?,No,y/n,completed_data_analysis,,
+"If yes, approximately how many data analyses have you completed?",0 to 5,mc,number_completed_data_analysis,completed_data_analysis,Yes
+"If yes, approximately how many data analyses have you completed?",5 to 10,mc,number_completed_data_analysis,completed_data_analysis,Yes
+"If yes, approximately how many data analyses have you completed?",10 to 15,mc,number_completed_data_analysis,completed_data_analysis,Yes
+"If yes, approximately how many data analyses have you completed?",15+,mc,number_completed_data_analysis,completed_data_analysis,Yes
