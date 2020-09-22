@@ -7,7 +7,7 @@ runtime: shiny_prerendered
 ---
 
 
-```{r child = "setup.Rmd"}
+```{r child = "introduction.Rmd"}
 ```
 
 ```{r child = "assessment.Rmd"}
