@@ -30,7 +30,8 @@ library(fs)
 library(purrr)
 library(pander)
 library(rlang)
-
+devtools::install_github("jdtrat/taskdesignr")
+library(taskdesignr)
 
 # I created a local directory
 outputDir <- "storeDemographics"
@@ -49,109 +50,16 @@ saveData <- function(data, userID) {
 
 ```
 
-I think the question demographics should have the following structure. Four columns: 
-
-1. `question`: The demographic question to ask. 
-2. `option`: For questions that have options (like multiple choice or select questions), those values would go in thsi column. If the answers are not discrete variables, then there would be an NA which would get changed into "placeholder." 
-3. `input_type`: This describes the input type. For example, "numeric" would create a `numericInput`, "select" would create a `pickerInput` (from shinyWidgets package), etc.
-4. `label`: This becomes the column name when the data is saved. It also serves as the `id` for Shiny inputs (as in `input$`.
-
-```{r read data, eval = TRUE, message = FALSE, warning = FALSE}
-
-# read in local file
-sample <- readr::read_csv('sampleDemographics.csv')
-pander(head(sample))
-
-# nest the sample data
-# replace any NA with "placeholder"
-# I've added the question_number but there has to be a better way to do this...
-nestedSample <- sample %>% 
-  mutate(option = replace_na(option, "placeholder")) %>%
-  group_by(question) %>%
-  nest() %>%
-  ungroup() %>%
-  mutate(question_number = row_number(), .before = question) %>%
-  unnest(data) %>%
-  ## Remove this when you figure out dependence !
-  filter(is.na(dependence)) %>%
-  group_by(question_number) %>%
-  nest() %>%
-  ungroup()
-
-```
-
-```{r make functional, eval = TRUE}
-
-### First draft to automate this process.
-# defaultNumeric is default value for number stuff
-# I want to pass optional argumens -- how to?
-getUICode <- function(df, defaultNumeric = 25) {
-
-  inputType <- base::unique(df$input_type)
-
-  if (inputType ==  "select") {
-  output <- 
-    pickerInput(
-      inputId = base::unique(df$label),
-      label = base::unique(df$question),
-      choices = df$option,
-      options = list(
-      title = "Placeholder")
-      )
-  } else if (inputType == "numeric") {
-    
-    output <- 
-      numericInputIcon(
-          inputId = base::unique(df$label),
-          label = base::unique(df$question),
-          value = defaultNumeric,
-          icon = list(
-            #make the df$label sentence case in base R
-            base::paste0(base::toupper(base::substring(base::unique(df$label), 1,1)), 
-                         base::tolower(base::substring(base::unique(df$label), 2)))
-            )
-      )
-    
-  } else if (inputType == "mc") {
-    
-    output <- 
-      radioButtons(
-        inputId = base::unique(df$label),
-        label = base::unique(df$question),
-        choices = df$option
-)
-  } else if (inputType == "text") {
-    
-    output <- 
-       textInput(inputId = base::unique(df$label), 
-                 label = base::unique(df$question), 
-                 value = df$option)
-    
-  } else if (inputType == "y/n") {
-    
-    output <- 
-     radioButtons(
-        inputId = base::unique(df$label),
-        label = base::unique(df$question),
-        choices = df$option
-)
-  }
-  
-  return(list(output))
-  
-}
-
-allQs <- map(nestedSample$data, ~getUICode(.x))
-
-```
-
 ```{r, echo=FALSE}
 
 shinyApp(
 
   ui = fluidPage(
     textInput("userID", "Enter your username."),
-    allQs,
+    # this is using the taskdesignr package.
+    # the teaching_r_questions is a sample data set that
+    # is included in that package (raw csv file).
+    getUICode(teaching_r_questions),
     actionBttn("submit", "Submit"),
     
   ),
@@ -161,11 +69,17 @@ shinyApp(
     #access session client data -- url port. I'm not sure if this is unique for each visitor with shinyapps.io. I'm including userID just for reference now.
     user_id <- reactive({paste0(input$userID, session$clientData$url_port)})
     
-    # The input$first_language is hard coded. I'm not sure how to change that.
-    # It should be something like `eval(unique(firstLang$label))`
     formData <- reactive({
-      data <- tibble::tribble(~userID, ~language,
-                      input$userID, input$first_language)
+      data <- tibble::tribble(~userID, ~question, ~response,
+                      input$userID, "age", as.character(input$age),
+                      input$userID, "gender", input$gender,
+                      input$userID, "education_attained", input$education_attained,
+                      input$userID, "first_language", input$first_language,
+                      input$userID, "read_language", input$read_language,
+                      input$userID, "learned_r", input$learned_r,
+                      input$userID, "learned_programming_not_r",input$learned_programming_not_r,
+                      input$userID, "completed_data_analysis", input$completed_data_analysis
+                      )
       data
     })
     
