@@ -22,13 +22,13 @@ For example, we have a file `sleep.csv` in a folder called `data` that contains 
 ```
 
 ```{r}
-read_csv(file = "data/sleep.csv")
+read.csv(file = "data/sleep.csv")
 ```
 
 We can save this data frame to an object in R using the assignment operator, `<-`
 
 ```{r}
-sleep_data <- read_csv(file = "data/sleep.csv")
+sleep_data <- read.csv(file = "data/sleep.csv")
 ```
 
 ### Exercise
@@ -41,12 +41,12 @@ Read in the csv located at `data/airquality.csv` into R.
 
 ```{r csv2-check}
 grade_result(
-  pass_if(~ identical(.result, read_csv("data/airquality.csv")))
+  pass_if(~ identical(.result, read.csv("data/airquality.csv")))
 )
 ```
 
 ```{r csv2-solution}
-read_csv("data/airquality.csv")
+read.csv("data/airquality.csv")
 ```
 
 
