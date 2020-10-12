@@ -117,6 +117,8 @@ x <- c(8, 6, 7, 5, 3, 0, 9)
 ```
 
 ```{r logical-check}
+x <- c(8, 6, 7, 5, 3, 0, 9)
+
 grade_result(
   pass_if(~ identical(.result, x >= 3))
 )
@@ -129,6 +131,8 @@ x <- c(8, 6, 7, 5, 3, 0, 9)
 ```
 
 ```{r logical-2-check}
+x <- c(8, 6, 7, 5, 3, 0, 9)
+
 grade_result(
   pass_if(~ identical(.result, x > 5 & x <= 7))
 )

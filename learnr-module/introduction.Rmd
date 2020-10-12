@@ -121,6 +121,19 @@ question_ui_completed.text_area <- function(question, value, ...) {
 
 ### 1. What is your age (in years)?
 
+```{r}
+library(shiny)
+radioButtons("test", "This is a qeustion", choices = c("A", "B", "C"))
+```
+
+```{r, context = "server"}
+observe({
+ d <- data.frame(x = input$test, y = unname(Sys.info()["user"]))
+ print(d)
+})
+```
+
+
 ```{r q1, echo = FALSE}
 question(
   "1. What is your age (in years)?",
