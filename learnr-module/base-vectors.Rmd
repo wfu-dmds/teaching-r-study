@@ -223,6 +223,20 @@ grade_result(
 ```
 
 
+Create a vector `y` containing the values that are greater than 2 in vector `x`. 
+
+```{r index2, exercise = TRUE}
+x <- c(1:10)
+```
+
+
+```{r index2-check}
+grade_result(
+  pass_if(~identical(.result, y <- x[x>2] ))
+)
+```
+
+
 ### Lists
 
 An `R` _list_ is data structure consisting of an ordered collection of _components_. The components can be of different modes and types, for example, a list could be a collection of different types of vectors of different lengths, as seen below.
