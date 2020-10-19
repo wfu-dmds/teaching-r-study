@@ -35,6 +35,14 @@ sleep_data <- read.csv(file = "data/sleep.csv")
 
 Read in the csv located at `data/airquality.csv` into R.
 
+
+```{r, csv-setup}
+tmp <- read.csv("https://raw.githubusercontent.com/wfu-dmds/teaching-r-study/master/learnr-module/data/airquality.csv")
+fs::dir_create("data")
+write.csv(tmp, "data/airquality.csv", row.names = FALSE)
+tmp <- NULL
+```
+
 ```{r csv, exercise = TRUE}
 
 ```

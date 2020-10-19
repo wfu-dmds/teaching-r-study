@@ -1,6 +1,6 @@
 ## Manipulating data
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(nycflights13)
 ```
 
