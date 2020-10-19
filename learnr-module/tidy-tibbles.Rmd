@@ -103,6 +103,7 @@ question("**In the tibble ablove, what is the class for variable `c`**",
 
 You can save a tibble locally during an R session by _assigning_ it to a name using `<-`. For example, the code below assigns the tibble to `df`.
 
+
 ```{r}
 df <- tibble(
   numeric = 1:5,
@@ -132,6 +133,14 @@ dat <- tibble(
 ### Subsetting tibbles
 
 You can _subset_ a tibble by using a single square bracket `[row(s), column(s)]`, indicating the rows and columns you'd like to keep by number, or using the double square bracket, `[[column]]` to extract a single column, indicated by name or by position. For example below, if I wanted to subset `df` to only contain rows 1 and 2 and column 3, I would use the single square bracket as follows.
+
+```{r}
+tibble(
+  numeric = 1:5,
+  logical = TRUE,
+  character = LETTERS[1:5]
+)
+```
 
 ```{r}
 df[c(1, 2), 3]
