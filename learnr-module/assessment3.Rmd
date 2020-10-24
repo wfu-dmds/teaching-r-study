@@ -68,7 +68,7 @@ Use the console below to calculate the average number of sales by city.
 
 ```
 
-Create a new data frame called `txhousing_summary` with two columns: `city` and `average_sales`. This data frame should have one row per city.
+Create a new data frame called `txhousing_summary` with two columns: `city` and `average_sales` that contains the average number of sales by city. This data frame should have one row per city.
 
 ```{r ex5-3, exercise = TRUE}
 

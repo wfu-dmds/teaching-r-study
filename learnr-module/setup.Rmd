@@ -8,6 +8,21 @@ library(glue)
 library(praise)
 ```
 
+## Learning Objectives
+
+After completing this tutorial, you should be able to:
+
+1. Understand various data structures in R
+2. Read data into R
+3. Manipulate and summarize data
+4. Extract information from summarized data to answer analysis questions
+
+You will see similar information presented two different ways and will complete three short assessments.
+
+## Assessments
+
+There are three assessments, one before you being, one after the first section, and one at the end. These have the same questions. You are welcome to use any techniques to answer these questions. If you don't know how to answer any, don't worry - you can skip to the next topic by clicking "Next Topic".
+
 ```{r, echo = FALSE}
 question_ui_completed.no_mark <- function(question, value, ...) {
   choice_values <- learnr:::answer_values(question)

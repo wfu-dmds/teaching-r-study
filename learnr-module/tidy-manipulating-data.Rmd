@@ -256,6 +256,7 @@ flights %>%
 Using the `flights` data, find the the flights average `distance` grouped by `year`, `origin`, `dest`, and `arr_delay`.
 
 ```{r flights_summary, exercise = TRUE}
+
 ```
 
 ```{r flights_summary-solution}
