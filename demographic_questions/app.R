@@ -44,7 +44,7 @@ server <- function(input, output, session) {
                             input$userID, "first_language_other", input$first_language_other,
                             input$userID, "read_language", input$read_language,
                             input$userID, "learned_r", input$learned_r,
-                            input$userID, "years_using_r", input$years_using_r,
+                            input$userID, "years_using_r", as.character(input$years_using_r),
                             input$userID, "learned_programming_not_r",input$learned_programming_not_r,
                             input$userID, "years_programming_not_r", input$years_programming_not_r,
                             input$userID, "completed_data_analysis", input$completed_data_analysis,
