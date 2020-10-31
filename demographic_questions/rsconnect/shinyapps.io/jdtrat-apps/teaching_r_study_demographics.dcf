@@ -5,8 +5,9 @@ account: jdtrat-apps
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3134180
-bundleId: 3803350
+bundleId: 3803503
 url: https://jdtrat-apps.shinyapps.io/teaching_r_study_demographics/
-when: 1604119018.26799
+when: 1604123491.08354
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: survey_loon.rds
