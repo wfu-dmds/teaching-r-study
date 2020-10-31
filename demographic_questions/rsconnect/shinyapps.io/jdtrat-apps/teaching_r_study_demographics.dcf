@@ -1,0 +1,12 @@
+name: teaching_r_study_demographics
+title: teaching_r_study_demographics
+username:
+account: jdtrat-apps
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3134180
+bundleId: 3803350
+url: https://jdtrat-apps.shinyapps.io/teaching_r_study_demographics/
+when: 1604119018.26799
+asMultiple: FALSE
+asStatic: FALSE
