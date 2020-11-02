@@ -1,0 +1,38 @@
+---
+title: "Untitled"
+author: "Jonathan Trattner"
+date: "10/25/2020"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(shiny)
+library(taskdesignr)
+```
+
+
+```{r}
+demo_single_page(teaching_r_questions)
+```
+
+[s](tutorial.Rmd)
+
+<!-- ```{r, context="render", echo=FALSE} -->
+<!-- surveyUI(teaching_r_questions) -->
+<!-- ``` -->
+
+<!-- ```{r, context="server"} -->
+
+<!-- surveyServer(input = input, -->
+<!--              df = teaching_r_questions, -->
+<!--              session = session) -->
+
+<!-- shiny::observeEvent(input$submit, { -->
+<!--             print("hi") -->
+<!--         }) -->
+<!-- ``` -->
+<!-- [Click here to continue](tutorial.Rmd) -->
+
+
