@@ -200,7 +200,6 @@ tutorial_event_recorder <- function(username) {
       t <- readRDS(glue::glue("data_{username}.rds"))
     } else {
       t <- tibble::tibble(
-        session = runif(1) * 1e10,
         username = username,
         time = .POSIXct(numeric(0)),
         tutorial_id = character(),
@@ -212,6 +211,7 @@ tutorial_event_recorder <- function(username) {
     }
     t <- dplyr::bind_rows(t,
                    tibble::tibble(
+                     username = username,
                      time = Sys.time(),
                      tutorial_id = tutorial_id,
                      tutorial_version = tutorial_version,
