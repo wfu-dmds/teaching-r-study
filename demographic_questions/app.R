@@ -15,13 +15,40 @@ shinyjs.openExperiment = function(url) {
 # Set the URL for where the experiment is located
 experiment_url <- "https://jdtrat-apps.shinyapps.io/teaching_r_study/?user_id="
 
-ui <- shiny::fluidPage(
-  shinyjs::useShinyjs(),
-  shinyjs::extendShinyjs(text = js_code, 
-                functions = 'openExperiment'),
-  taskdesignr::surveyOutput(df = taskdesignr::teaching_r_questions,
-                            icon = icon("check"))
+#establish SASS file
+sass::sass(
+  sass::sass_file("www/survey.scss"),
+  output = "www/survey.css"
 )
+
+ui <- shiny::fillPage(
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "survey.css")
+  ),
+  shinyjs::useShinyjs(),
+  shinyjs::extendShinyjs(text = js_code,
+                         functions = 'openExperiment'),
+  div(class = "grid",
+      div(class = "survey",
+          h1("Demographic Questions"),
+          taskdesignr::surveyOutput(df = taskdesignr::teaching_r_questions,
+                                    icon = icon("check"))))
+)
+# ui <- shiny::fluidPage(
+#   tags$head(
+#     tags$link(rel = "stylesheet", type = "text/css", href = "survey.css")
+#   ),
+#   shinyjs::useShinyjs(),
+#   shinyjs::extendShinyjs(text = js_code,
+#                          functions = 'openExperiment'),
+#   column(width = 6, offset = 4,
+#          div(class = "survey",
+#              h1("Demographic Questions"),
+#              taskdesignr::surveyOutput(df = taskdesignr::teaching_r_questions,
+#                                 icon = icon("check")))
+#   )
+#   )
+
 
 server <- function(input, output, session) {
   

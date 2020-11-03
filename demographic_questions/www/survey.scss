@@ -1,0 +1,27 @@
+$color: #add8e6;
+$little_dark: darken($color, 5%);
+$light: lighten($color, 15%);
+$dark: darken($color, 15%);
+
+.grid {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: $color;
+
+}
+
+
+.container-fluid {
+  background-color: $little-dark;
+}
+.survey {
+  padding: 20px;
+  /* border: 1px solid black; */
+  grid-column-start: 2;
+  grid-column-end: 2;
+  justify-self: center;
+  position: center;
+  background-color: $little-dark;
+}
