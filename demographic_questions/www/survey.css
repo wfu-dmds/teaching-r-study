@@ -1,8 +1,3 @@
-/* The body class clips the survey. This allows user to scroll and see its entirety.
-.body {
-  overflow: scroll;
-}
-*/
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro|Montserrat|Raleway");
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 .grid {
@@ -38,17 +33,18 @@ code {
   font-size: 14px;
 }
 
-/* .console {
-	font-family: 'Inconsolata', monospace;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	background: black;
-	opacity: .8;
-	padding: 20px;
-	color: white;
-	z-index: 99999;
-} */
+.console {
+  font-family: 'Inconsolata', monospace;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: black;
+  opacity: .8;
+  padding: 20px;
+  color: white;
+  z-index: 99999;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #333;
   font-family: 'Montserrat', sans-serif;
