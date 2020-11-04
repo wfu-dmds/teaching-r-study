@@ -141,8 +141,6 @@ question_ui_completed.text_area <- function(question, value, ...) {
 
 ```
 
-
-
 <!-- ## Log In -->
 
 <!-- Welcome to the Introduction to R modules! To begin, create a username so that you can return later. If you already have a username, click "I am a returning user" below. -->
@@ -184,58 +182,114 @@ question_ui_completed.text_area <- function(question, value, ...) {
 <!--   updateTextInput(session, "user_new", placeholder = user()) -->
 <!-- }) -->
 
-<!-- ``` -->
+<!-- <!-- ``` -->
+
+```{r setup, include=FALSE}
+
+learnr::tutorial_options(exercise.checker = gradethis::grade_learnr)
+rdrop2::drop_auth(rdstoken = "token.rds")
+
+tutorial_event_recorder <- function(username) {
+
+  recorder <- function(tutorial_id, tutorial_version, user_id,
+                       event, data) {
+    if (rdrop2::drop_exists(glue::glue("teaching-r-study/data_{username}.rds"))) {
+      rdrop2::drop_download(path = glue::glue("teaching-r-study/data_{username}.rds"),
+                    local_path = glue::glue("data_{username}.rds"),
+                    overwrite = TRUE)
+      t <- readRDS(glue::glue("data_{username}.rds"))
+    } else {
+      t <- tibble::tibble(
+        username = username,
+        time = .POSIXct(numeric(0)),
+        tutorial_id = character(),
+        tutorial_version = character(),
+        user_id = character(),
+        event = character(),
+        data = list())
+
+    }
+    t <- dplyr::bind_rows(t,
+                   tibble::tibble(
+                     username = username,
+                     time = Sys.time(),
+                     tutorial_id = tutorial_id,
+                     tutorial_version = tutorial_version,
+                     user_id = user_id,
+                     event = event,
+                     data = list(data)
+                   )
+    )
+    saveRDS(t, file = glue::glue("data_{username}.rds"))
+    rdrop2::drop_upload(file = glue::glue("data_{username}.rds"),
+                path = glue::glue("teaching-r-study"))
+  }
+  recorder
+}
+
+```
 
 
-<!-- ```{r setup, include=FALSE} -->
-<!-- drop_auth(rdstoken = "droptoken.rds") -->
+<!-- # Local stuff -->
+<!-- # ```{r setup, include=FALSE} -->
+<!-- #  -->
+<!-- # rdrop2::drop_auth(rdstoken = "../token.rds") -->
+<!-- #  -->
+<!-- # learnr::tutorial_options(exercise.checker = gradethis::grade_learnr) -->
+<!-- #  -->
+<!-- # tutorial_event_recorder <- function(username) { -->
+<!-- #  -->
+<!-- #   recorder <- function(tutorial_id, tutorial_version, user_id, -->
+<!-- #                        event, data) { -->
+<!-- #     if (file.exists(glue("../jdtrat_additions/test_url_user/data_{username}.rds"))) { -->
+<!-- #       t <- readRDS(glue("../jdtrat_additions/test_url_user/data_{username}.rds")) -->
+<!-- #     } else { -->
+<!-- #       t <- tibble::tibble( -->
+<!-- #         session = runif(1) * 1e10, -->
+<!-- #         username = username, -->
+<!-- #         time = .POSIXct(numeric(0)), -->
+<!-- #         tutorial_id = character(), -->
+<!-- #         tutorial_version = character(), -->
+<!-- #         user_id = character(), -->
+<!-- #         event = character(), -->
+<!-- #         data = list()) -->
+<!-- #  -->
+<!-- #     } -->
+<!-- #     t <- bind_rows(t, -->
+<!-- #                    tibble::tibble( -->
+<!-- #                      time = Sys.time(), -->
+<!-- #                      tutorial_id = tutorial_id, -->
+<!-- #                      tutorial_version = tutorial_version, -->
+<!-- #                      user_id = user_id, -->
+<!-- #                      event = event, -->
+<!-- #                      data = list(data) -->
+<!-- #                    ) -->
+<!-- #     ) -->
+<!-- #     saveRDS(t, file = glue("../jdtrat_additions/test_url_user/data_{username}.rds")) -->
+<!-- #   } -->
+<!-- #   recorder -->
+<!-- # } -->
+<!-- #  -->
+<!-- #  -->
+<!-- # ``` -->
 
-<!-- tutorial_options(exercise.checker = gradethis::grade_learnr) -->
+```{r, echo = FALSE, context = "server"}
 
-<!-- tutorial_event_recorder <- function(username) { -->
+observe({
+query <- shiny::parseQueryString(session$clientData$url_search)
 
-<!--   recorder <- function(tutorial_id, tutorial_version, user_id,  -->
-<!--                        event, data) { -->
-<!--     if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) { -->
-<!--       drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),  -->
-<!--                     local_path = glue("data_{user_id}.rds"), -->
-<!--                     overwrite = TRUE) -->
-<!--       t <- readRDS(glue("data_{user_id}.rds")) -->
-<!--     } else { -->
-<!--       t <- tibble( -->
-<!--         session = runif(1) * 1e10, -->
-<!--         username = username, -->
-<!--         time = .POSIXct(numeric(0)), -->
-<!--         tutorial_id = character(), -->
-<!--         tutorial_version = character(), -->
-<!--         user_id = character(), -->
-<!--         event = character(), -->
-<!--         data = list()) -->
+if (!base::is.null(query[["user_id"]])) {
+  user_id <- stringr::str_extract(string = query[["user_id"]], 
+                                  pattern = "([^/]+)")
+    
+} else {
+  user_id <- "NO_USERNAME"
+}
 
-<!--     } -->
-<!--     t <- bind_rows(t, -->
-<!--                    tibble( -->
-<!--                      time = Sys.time(), -->
-<!--                      tutorial_id = tutorial_id, -->
-<!--                      tutorial_version = tutorial_version, -->
-<!--                      user_id = user_id, -->
-<!--                      event = event, -->
-<!--                      data = list(data) -->
-<!--                    ) -->
-<!--     ) -->
-<!--     saveRDS(t, file = glue("data_{user_id}.rds")) -->
-<!--     drop_upload(file = glue("data_{user_id}.rds"), -->
-<!--                 path = glue("teaching-r-study")) -->
-<!--   } -->
-<!--   recorder -->
-<!-- } -->
-<!-- ``` -->
+options(tutorial.event_recorder = tutorial_event_recorder(username = user_id))
 
-<!-- ```{r, echo = FALSE, context = "server"} -->
-<!-- observe({ -->
-<!--   if (input$user %in% usernames$username) { -->
-<!--   options(tutorial.event_recorder = tutorial_event_recorder(user)) -->
-<!--   } -->
-<!-- }) -->
-<!-- ``` -->
+})
+
+
+```
 
