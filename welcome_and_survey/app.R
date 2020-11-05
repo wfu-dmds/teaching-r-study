@@ -1,4 +1,17 @@
 library(shiny)
+library(shinyjs)
+source('www/generate_user_ids.R')
+
+# define js function for opening urls in new tab/window
+# based on https://stackoverflow.com/questions/41426016/shiny-open-multiple-browser-tabs
+js_code <- "
+shinyjs.openExperiment = function(url) {
+  window.open(url);
+}
+"
+
+# Set the URL for where the experiment is located
+experiment_url <- "https://jdtrat-apps.shinyapps.io/teaching_r_study_demographics/?user_id="
 
 ui <- shinyUI(
     navbarPage(
@@ -7,6 +20,9 @@ ui <- shinyUI(
         theme = "style.css",
         collapsible = TRUE,
         tabPanel(
+          shinyjs::useShinyjs(),
+          shinyjs::extendShinyjs(text = js_code,
+                                 functions = 'openExperiment'),
             "Home",
             tags$head(tags$script(
                 HTML(
@@ -79,46 +95,35 @@ ui <- shinyUI(
       tabPanel(
           "Consent",
           includeHTML("consent.html"),
-          conditionalPanel(
-              condition = "output.random == 'A'",
-              actionButton(
-                  inputId = "yes",
-                  label = "Yes, I agree to this study",
-                  icon = icon("check"),
-                  onclick = "window.open('http://google.com')"
-              ),
-              actionButton(
-                  inputId = "no",
-                  label = "No, I do not agree to this study",
-                  onclick = "fakeClick('Home')"
-              ),
-              conditionalPanel(
-                  condition = "output.random == 'B'",
-                  actionButton(
-                      inputId = "yes",
-                      label = "Yes, I agree to this study",
-                      icon = icon("check"),
-                      onclick = "window.open('http://yahoo.com')"
-                  ),
-                  actionButton(
-                      inputId = "no",
-                      label = "No, I do not agree to this study",
-                      onclick = "fakeClick('Home')"
-                  )
-              ),
-              hr()
+          actionButton(
+            inputId = "yes",
+            label = "Yes, I agree to this study",
+            icon = icon("check")
+          ),
+          actionButton(
+            inputId = "no",
+            label = "No, I do not agree to this study",
+            onclick = "fakeClick('Home')"
           )
-          
       )
     )
 )
 
 
 server <- function(input, output) {
-    output$random <- reactive({
-        ifelse(runif(1) > 0.5, "A", "B")
-    })
-    outputOptions(output, "random", suspendWhenHidden = FALSE)
+  
+  # Load dropbox authorization
+  rdrop2::drop_auth(rdstoken = 'token.rds')
+  
+  vals <- reactiveValues()
+  vals$group <- ifelse(runif(1) > 0.5, "A", "B")
+  user_id <- get_username(group = isolate(vals$group),
+                          drop_path = "teaching-r-study/")
+
+    # open user-specific link
+    shinyjs::onclick("yes", 
+                     shinyjs::js$openExperiment(paste0(experiment_url, user_id, "/")))
+    
 }
 
 shinyApp(ui = ui, server = server)

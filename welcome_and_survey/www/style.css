@@ -1,40 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Montserrat|Raleway');
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
-$color: #add8e6;
-$little_dark: darken($color, 5%);
-$little_light: lighten($color, 5%);
-$light: lighten($color, 15%);
-$dark: darken($color, 15%);
-
-.grid {
-  display: grid;
-  overflow: scroll;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: $light;
-
-}
-
-.container-fluid {
-  background-color: $little_light;
-}
-
-.survey {
-  padding: 20px;
-  /* border: 1px solid black; */
-  grid-column-start: 2;
-  grid-column-end: 2;
-  justify-items: center;
-  justify-self: center;
-  position: center;
-  background-color: $little_light;
-}
-
 body {
 	font-family: 'Raleway', sans-serif;
-	background-color: $light;
 }
 
 code {
@@ -52,7 +20,7 @@ code {
 	padding: 20px;
 	color: white;
 	z-index: 99999;
-} 
+}
 
 h1, h2, h3, h4, h5, h6 {
 	color: #333;
@@ -61,13 +29,13 @@ h1, h2, h3, h4, h5, h6 {
 
 h1, h2, h3 {
 	text-transform: uppercase;
-	text-align: left;
+	text-align: center;
 	letter-spacing: .1em;
 	line-height: 1.2;
 }
 
 h1 {
-	margin: 36px 0;
+	margin: 50px 0;
 }
 
 h1.title{
