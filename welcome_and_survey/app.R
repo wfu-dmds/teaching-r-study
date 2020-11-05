@@ -1,12 +1,13 @@
 library(shiny)
 library(shinyjs)
+library(shinyalert)
 source('www/generate_user_ids.R')
 
 # define js function for opening urls in new tab/window
 # based on https://stackoverflow.com/questions/41426016/shiny-open-multiple-browser-tabs
 js_code <- "
 shinyjs.openExperiment = function(url) {
-  window.open(url);
+  window.location.replace(url);
 }
 "
 
@@ -23,6 +24,7 @@ ui <- shinyUI(
           shinyjs::useShinyjs(),
           shinyjs::extendShinyjs(text = js_code,
                                  functions = 'openExperiment'),
+          shinyalert::useShinyalert(),
             "Home",
             tags$head(tags$script(
                 HTML(
@@ -117,13 +119,17 @@ server <- function(input, output) {
   
   vals <- reactiveValues()
   vals$group <- ifelse(runif(1) > 0.5, "A", "B")
-  user_id <- get_username(group = isolate(vals$group),
-                          drop_path = "teaching-r-study/")
+  
 
-    # open user-specific link
-    shinyjs::onclick("yes", 
-                     shinyjs::js$openExperiment(paste0(experiment_url, user_id, "/")))
-    
+  observeEvent(input$yes,{
+    shinyalert::shinyalert(title = "Redirecting Now...", 
+                           type = "info",
+                           showConfirmButton = FALSE)
+    user_id <- get_username(group = isolate(vals$group),
+                            drop_path = "teaching-r-study/")
+    shinyjs::js$openExperiment(paste0(experiment_url, user_id, "/"))
+  })
+
 }
 
 shinyApp(ui = ui, server = server)
