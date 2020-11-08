@@ -3,9 +3,9 @@
 
 # Set up usernames with 10, download and save original ones and print out lenths
 setup_usernames('testing/', num_usernames = 10)
-rdrop2::drop_download('testing/all_usernames.rds', overwrite = T)
-rdrop2::drop_download('testing/group_a.rds', overwrite = T)
-rdrop2::drop_download('testing/group_b.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/all_usernames.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/group_a.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/group_b.rds', overwrite = T)
 original_usernames <- readRDS('all_usernames.rds')
 original_group_a <- readRDS('group_a.rds')
 original_group_b <- readRDS('group_b.rds')
@@ -18,10 +18,10 @@ length(original_group_b)
 
 
 # Add new usernames and then download and save and print out lengths
-add_usernames('testing/', num_usernames = 10)
-rdrop2::drop_download('testing/all_usernames.rds', overwrite = T)
-rdrop2::drop_download('testing/group_a.rds', overwrite = T)
-rdrop2::drop_download('testing/group_b.rds', overwrite = T)
+add_usernames('teaching-r-study/', num_usernames = 10)
+rdrop2::drop_download('teaching-r-study/all_usernames.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/group_a.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/group_b.rds', overwrite = T)
 added_usernames <- readRDS('all_usernames.rds')
 added_group_a <- readRDS('group_a.rds')
 added_group_b <- readRDS('group_b.rds')
@@ -33,10 +33,10 @@ length(added_group_a)
 length(added_group_b)
 
 # Remove the newly added usernames, download and save and print length
-remove_usernames('testing/', num_usernames = 10)
-rdrop2::drop_download('testing/all_usernames.rds', overwrite = T)
-rdrop2::drop_download('testing/group_a.rds', overwrite = T)
-rdrop2::drop_download('testing/group_b.rds', overwrite = T)
+remove_usernames('teaching-r-study/', num_usernames = 10)
+rdrop2::drop_download('teaching-r-study/all_usernames.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/group_a.rds', overwrite = T)
+rdrop2::drop_download('teaching-r-study/group_b.rds', overwrite = T)
 removed_usernames <- readRDS('all_usernames.rds')
 removed_group_a <- readRDS('group_a.rds')
 removed_group_b <- readRDS('group_b.rds')
