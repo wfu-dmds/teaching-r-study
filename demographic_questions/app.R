@@ -1,5 +1,6 @@
 library(shiny)
 library(shinyjs)
+library(shinyalert)
 library(rdrop2)
 library(glue)
 library(taskdesignr)
@@ -10,6 +11,7 @@ js_code <- "
 shinyjs.openExperiment = function(url) {
   window.location.replace(url);
 }
+
 "
 
 # Set the URL for where the experiment is located
@@ -25,6 +27,7 @@ ui <- shiny::fillPage(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "survey.css")
   ),
+  shinyalert::useShinyalert(),
   shinyjs::useShinyjs(),
   shinyjs::extendShinyjs(text = js_code,
                          functions = 'openExperiment'),
@@ -70,9 +73,15 @@ server <- function(input, output, session) {
   
   # open user-specific link
   shinyjs::onclick("submit", 
-                   js$openExperiment(paste0(experiment_url, input$userID, "/")))
+                   )
   #save user-specific survey data to dropbox.
-  observeEvent(input$submit, {save_survey_data(username = input$userID)})
+  observeEvent(input$submit, {
+    shinyalert::shinyalert(title = "Redirecting to Modules Now...", 
+                           type = "info",
+                           showConfirmButton = FALSE)
+    save_survey_data(username = input$userID)
+    shinyjs::js$openExperiment(paste0(experiment_url, input$userID, "/"))
+    })
   
 }
   
