@@ -5,11 +5,25 @@ source('www/generate_user_ids.R')
 
 # define js function for opening urls in new tab/window
 # based on https://stackoverflow.com/questions/41426016/shiny-open-multiple-browser-tabs
-js_code <- "
+js_code <- '
 shinyjs.openExperiment = function(url) {
   window.location.replace(url);
 }
-"
+
+shinyjs.closeExperiment = function() {
+  window.close()
+}
+
+shinyjs.fakeClick = function(tabName) {
+          var dropdownList = document.getElementsByTagName("a");
+          for (var i = 0; i < dropdownList.length; i++) {
+            var link = dropdownList[i];
+            if(link.getAttribute("data-value") == tabName) {
+              link.click();
+            };
+          }
+        };
+'
 
 # Set the URL for where the experiment is located
 experiment_url <- "https://jdtrat-apps.shinyapps.io/teaching_r_study_demographics/?user_id="
@@ -20,12 +34,11 @@ ui <- shinyUI(
         fluid = TRUE,
         theme = "style.css",
         collapsible = TRUE,
-        tabPanel(
+        tabPanel(title = "Home",
           shinyjs::useShinyjs(),
           shinyjs::extendShinyjs(text = js_code,
-                                 functions = 'openExperiment'),
+                                 functions = c('openExperiment', 'closeExperiment', 'fakeClick')),
           shinyalert::useShinyalert(),
-            "Home",
             tags$head(tags$script(
                 HTML(
                     '
@@ -104,8 +117,7 @@ ui <- shinyUI(
           ),
           actionButton(
             inputId = "no",
-            label = "No, I do not agree to this study",
-            onclick = "fakeClick('Home')"
+            label = "No, I do not agree to this study"
           )
       )
     )
@@ -120,7 +132,6 @@ server <- function(input, output) {
   vals <- reactiveValues()
   vals$group <- ifelse(runif(1) > 0.5, "A", "B")
   
-
   observeEvent(input$yes,{
     shinyalert::shinyalert(title = "Redirecting Now...", 
                            type = "info",
@@ -130,6 +141,14 @@ server <- function(input, output) {
     shinyjs::js$openExperiment(paste0(experiment_url, user_id, "/"))
   })
 
+  observeEvent(input$no, {
+    shinyalert::shinyalert(title = "Redirecting Home...",
+                           text = "Thanks for your interest, but without consenting, you can't participate. Please revisit if you wish to take part in this study in the future.",
+                           showConfirmButton = F,
+                           timer = 5000)
+    shinyjs::delay(3600, shinyjs::js$fakeClick('Home'))
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)

@@ -5,8 +5,8 @@ account: jdtrat-apps
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3166031
-bundleId: 3821977
+bundleId: 3833361
 url: https://jdtrat-apps.shinyapps.io/teaching_r_study_welcome/
-when: 1604546040.36394
+when: 1604818232.3571
 asMultiple: FALSE
 asStatic: FALSE
