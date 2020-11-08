@@ -8,7 +8,7 @@ library(taskdesignr)
 # based on https://stackoverflow.com/questions/41426016/shiny-open-multiple-browser-tabs
 js_code <- "
 shinyjs.openExperiment = function(url) {
-  window.open(url);
+  window.location.replace(url);
 }
 "
 
@@ -34,21 +34,6 @@ ui <- shiny::fillPage(
           taskdesignr::surveyOutput(df = taskdesignr::teaching_r_questions,
                                     icon = icon("check"))))
 )
-# ui <- shiny::fluidPage(
-#   tags$head(
-#     tags$link(rel = "stylesheet", type = "text/css", href = "survey.css")
-#   ),
-#   shinyjs::useShinyjs(),
-#   shinyjs::extendShinyjs(text = js_code,
-#                          functions = 'openExperiment'),
-#   column(width = 6, offset = 4,
-#          div(class = "survey",
-#              h1("Demographic Questions"),
-#              taskdesignr::surveyOutput(df = taskdesignr::teaching_r_questions,
-#                                 icon = icon("check")))
-#   )
-#   )
-
 
 server <- function(input, output, session) {
   
