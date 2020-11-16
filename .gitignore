@@ -3,4 +3,7 @@
 .RData
 .Ruserdata
 .httr-oauth
+<<<<<<< HEAD
 .DS_Store
+=======
+>>>>>>> 732d8e57e47b22dab99878479aa8d350aabd20a5
