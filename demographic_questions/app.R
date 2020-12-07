@@ -3,7 +3,7 @@ library(shinyjs)
 library(shinyalert)
 library(rdrop2)
 library(glue)
-library(taskdesignr)
+library(shinysurveys)
 
 # define js function for opening urls in new tab/window
 # based on https://stackoverflow.com/questions/41426016/shiny-open-multiple-browser-tabs
@@ -34,14 +34,14 @@ ui <- shiny::fillPage(
   div(class = "grid",
       div(class = "survey",
           h1("Demographic Questions"),
-          taskdesignr::surveyOutput(df = taskdesignr::teaching_r_questions,
+          shinysurveys::surveyOutput(df = shinysurveys::teaching_r_questions,
                                     icon = icon("check"))))
 )
 
 server <- function(input, output, session) {
   
-  taskdesignr::renderSurvey(input = input, 
-                            df = taskdesignr::teaching_r_questions,
+  shinysurveys::renderSurvey(input = input, 
+                            df = shinysurveys::teaching_r_questions,
                             session = session)
   
   # Load dropbox authorization
