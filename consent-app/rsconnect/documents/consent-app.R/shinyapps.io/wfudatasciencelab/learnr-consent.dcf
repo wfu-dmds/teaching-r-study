@@ -1,0 +1,12 @@
+name: learnr-consent
+title: learnr-consent
+username:
+account: wfudatasciencelab
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3552955
+bundleId: 4163676
+url: https://wfudatasciencelab.shinyapps.io/learnr-consent/
+when: 1612108091.69328
+asMultiple: FALSE
+asStatic: FALSE

@@ -6,7 +6,6 @@ output:
 runtime: shiny_prerendered
 ---
 
-
 ```{r child = "setup.Rmd"}
 ```
 

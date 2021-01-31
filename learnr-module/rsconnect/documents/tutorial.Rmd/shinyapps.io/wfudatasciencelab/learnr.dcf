@@ -1,0 +1,12 @@
+name: learnr
+title: learnr
+username:
+account: wfudatasciencelab
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3552702
+bundleId: 4162057
+url: https://wfudatasciencelab.shinyapps.io/learnr/
+when: 1612055846.85723
+asMultiple: FALSE
+asStatic: FALSE

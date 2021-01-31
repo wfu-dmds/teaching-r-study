@@ -1,0 +1,12 @@
+name: learnr-demographics
+title: learnr-demographics
+username:
+account: wfudatasciencelab
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3552951
+bundleId: 4163717
+url: https://wfudatasciencelab.shinyapps.io/learnr-demographics/
+when: 1612108862.92333
+asMultiple: FALSE
+asStatic: FALSE

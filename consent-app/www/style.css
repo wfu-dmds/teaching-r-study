@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Montserrat|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+body {
+	font-family: 'Raleway', sans-serif;
+}
+
+code {
+	font-family: 'Source Code Pro', monospace;
+	font-size: 14px;
+}
+
+.console {
+	font-family: 'Inconsolata', monospace;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: black;
+	opacity: .8;
+	padding: 20px;
+	color: white;
+	z-index: 99999;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #333;
+	font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3 {
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: .1em;
+	line-height: 1.2;
+}
+
+h1 {
+	margin: 50px 0;
+}
+
+h1.title{
+	color: #416983;
+}
+
+
+h3 {
+	font-style: italic;
+	font-family: 'Montserrat', sans-serif;
+}
+
+
+p {
+	color: #333;
+	margin: 35px;
+	margin-bottom: 10px;
+}
+
+li.l {
+  margin-left: 40px;
+  margin-right: 35px;
+}

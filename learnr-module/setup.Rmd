@@ -1,4 +1,3 @@
-
 ```{r load-packages, include = FALSE}
 library(learnr)
 library(gradethis)
@@ -6,16 +5,17 @@ library(tidyverse)
 library(rdrop2)
 library(glue)
 library(praise)
+library(shinysurveys)
 ```
 
 ## Learning Objectives
 
 After completing this tutorial, you should be able to:
 
-1. Understand various data structures in R
-2. Read data into R
-3. Manipulate and summarize data
-4. Extract information from summarized data to answer analysis questions
+1.  Understand various data structures in R
+2.  Read data into R
+3.  Manipulate and summarize data
+4.  Extract information from summarized data to answer analysis questions
 
 You will see similar information presented two different ways and will complete three short assessments.
 
@@ -47,18 +47,17 @@ question_is_correct.always_correct <- function(question, value, ...) {
 }
 ```
 
-
 ```{r setup, include=FALSE}
 
 learnr::tutorial_options(exercise.checker = gradethis::grade_learnr)
-rdrop2::drop_auth(rdstoken = "../token.rds")
+rdrop2::drop_auth(rdstoken = "token.rds")
 
 tutorial_event_recorder <- function(username) {
 
   recorder <- function(tutorial_id, tutorial_version, user_id,
                        event, data) {
-    if (rdrop2::drop_exists(glue::glue("teaching-r-study/data_{username}.rds"))) {
-      rdrop2::drop_download(path = glue::glue("teaching-r-study/data_{username}.rds"),
+    if (rdrop2::drop_exists(glue::glue("/D'Agostino McGowan Data Science Lab/learnr_results/data_{username}.rds"))) {
+      rdrop2::drop_download(path = glue::glue("/D'Agostino McGowan Data Science Lab/learnr_results/data_{username}.rds"),
                     local_path = glue::glue("data_{username}.rds"),
                     overwrite = TRUE)
       t <- readRDS(glue::glue("data_{username}.rds"))
@@ -86,13 +85,12 @@ tutorial_event_recorder <- function(username) {
     )
     saveRDS(t, file = glue::glue("data_{username}.rds"))
     rdrop2::drop_upload(file = glue::glue("data_{username}.rds"),
-                path = glue::glue("teaching-r-study"))
+                path = "/D'Agostino McGowan Data Science Lab/learnr_results/")
   }
   recorder
 }
 
 ```
-
 
 ```{r, echo = FALSE, context = "server"}
 
@@ -100,8 +98,7 @@ observe({
 query <- shiny::parseQueryString(session$clientData$url_search)
 
 if (!base::is.null(query[["user_id"]])) {
-  user_id <- stringr::str_extract(string = query[["user_id"]], 
-                                  pattern = "([^/]+)")
+  user_id <- shinysurveys:::base_extract_user_id(query)
     
 } else {
   user_id <- "NO_USERNAME"
@@ -113,4 +110,3 @@ options(tutorial.event_recorder = tutorial_event_recorder(username = user_id))
 
 
 ```
-
