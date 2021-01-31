@@ -1,10 +1,29 @@
 ## Assessment
 
-1. On a scale of 1 to 10, with 1 being not competent and 10 being very competent, how competent do you think you are using the R programming language?
+```{r, echo = FALSE}
 
-2. On a scale of 1 to 10, with 1 being very unlikely and 10 being very likely, how likely do they think it is that you will master the R language eventually
+shiny::sliderInput(inputId = "r-competence-3",
+                   label = "On a scale of 1 to 10, with 1 being not competent and 10 being very competent, how competent do you think you are using the R programming language?", 
+                   min = 1, 
+                   max = 10, 
+                   value = 5, 
+                   step = 1)
 
-3. On a scale of 1 to 10, with 1 being very unejoyable and 10 being very enjoyable, how much do you enjoy learning R?
+shiny::sliderInput(inputId = "r-master-eventually-3",
+                   label = "On a scale of 1 to 10, with 1 being very unlikely and 10 being very likely, how likely do they think it is that you will master the R language eventually?", 
+                   min = 1, 
+                   max = 10, 
+                   value = 5, 
+                   step = 1)
+
+shiny::sliderInput(inputId = "r-enjoy-learning-3",
+                   label = "On a scale of 1 to 10, with 1 being very unejoyable and 10 being very enjoyable, how much do you enjoy learning R?", 
+                   min = 1, 
+                   max = 10, 
+                   value = 5, 
+                   step = 1)
+
+```
 
 #### The following questions walk you through a short data analysis in R. Complete as many components as you can, feel free to skip any portions that you are unsure of.
 
@@ -13,7 +32,6 @@ You have a .csv file called `txhousing.csv`. Fill in the blank in the code below
 ```{r, eval = FALSE}
 txhousing <- ________(file = "txhousing.csv")
 ```
-
 
 ```{r ex1-3, echo = FALSE}
 question(
@@ -24,7 +42,6 @@ question(
   correct = "Answer Submitted."
 )
 ```
-
 
 Below is a data frame with information about the housing market in Texas.
 
@@ -74,7 +91,6 @@ Create a new data frame called `txhousing_summary` with two columns: `city` and 
 
 ```
 
-
 ```{r ex6-3, echo = FALSE}
 question(
   "What is the average number of sales in Austin?",
@@ -84,4 +100,3 @@ question(
   correct = "Answer Submitted."
 )
 ```
-
