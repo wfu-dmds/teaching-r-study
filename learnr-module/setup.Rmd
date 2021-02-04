@@ -23,7 +23,6 @@ You will see similar information presented two different ways and will complete 
 
 There are three assessments, one before you being, one after the first section, and one at the end. These have the same questions. You are welcome to use any techniques to answer these questions. If you don't know how to answer any, don't worry - you can skip to the next topic by clicking "Next Topic".
 
-
 ```{r setup, include=FALSE}
 
 learnr::tutorial_options(exercise.checker = gradethis::grade_learnr)
@@ -86,7 +85,7 @@ save_assessments <- function(assessment_number, username) {
 
   input <- getDefaultReactiveDomain()$input
     
-  assessment_ids <- paste0(c("r-competence-", "r-master-eventually-", "r-enjoy-learning-"), assessment_number)
+  assessment_ids <- paste0(c("r-competence-", "r-master-eventually-", "r-enjoy-learning-", "ex1-", "ex2-", "ex3-", "ex4-"), assessment_number)
 
   assess_response <- tibble::tibble(
     username = username,
@@ -100,6 +99,18 @@ save_assessments <- function(assessment_number, username) {
     ]],
     input[[
     assessment_ids[3]
+    ]],
+    input[[
+    assessment_ids[4]
+    ]],
+    input[[
+    assessment_ids[5]
+    ]],
+    input[[
+    assessment_ids[6]
+    ]],
+    input[[
+    assessment_ids[7]
     ]]
     )
   )
@@ -113,9 +124,17 @@ update_assessments <- function(number) {
   
   input <- getDefaultReactiveDomain()$input
   
-  shiny::observeEvent(
-    input[[paste0("r-competence-", number)]] | input[[paste0("r-master-eventually-", number)]] | input[[paste0("r-enjoy-learning-", number)]], 
-    {
+  assessment_inputs <- shiny::reactive({
+    list(input[[paste0("r-competence-", number)]],
+         input[[paste0("r-master-eventually-", number)]],
+         input[[paste0("r-enjoy-learning-", number)]],
+         input[[paste0("ex1-", number)]],
+         input[[paste0("ex2-", number)]],
+         input[[paste0("ex3-", number)]],
+         input[[paste0("ex4-", number)]])
+  })
+  
+  shiny::observeEvent(assessment_inputs(), {
     user_id <- access_username()
   
     save_assessments(assessment_number = number, 
