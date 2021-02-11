@@ -15,9 +15,6 @@ shinyjs.openExperiment = function(url) {
 }
 "
 
-# Set the URL for where the experiment is located
-experiment_url <- "https://wfudatasciencelab.shinyapps.io/learnr/?user_id="
-
 library(shiny)
 
 ui <- fluidPage(
@@ -66,7 +63,14 @@ server <- function(input, output, session) {
                            type = "info",
                            showConfirmButton = FALSE)
     save_survey_data(username = input$userID)
-    shinyjs::js$openExperiment(paste0(experiment_url, input$userID, "/"))
+    
+    # Send to appropriate learnr modules
+    if (grepl("_GA", input$userID)) {
+      shinyjs::js$openExperiment(paste0("https://wfudatasciencelab.shinyapps.io/learnr-a/?user_id=", input$userID, "/"))
+    } else if (grepl("_GB", input$userID)) {
+      shinyjs::js$openExperiment(paste0("https://wfudatasciencelab.shinyapps.io/learnr-b/?user_id=", input$userID, "/"))
+    }
+    
   })
   
 }
