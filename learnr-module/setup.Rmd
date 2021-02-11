@@ -6,6 +6,7 @@ library(rdrop2)
 library(glue)
 library(praise)
 library(shinysurveys)
+library(shinyalert)
 ```
 
 ## Learning Objectives
@@ -156,5 +157,31 @@ observe({
 update_assessments(1)
 update_assessments(2)
 update_assessments(3)
+
+observeEvent(input$complete_session, {
+  showModal(
+      modalDialog(title = "Congratulations, you finished the study!",
+                  textInput("email", 
+                            "If you would like to receive a 5$ Amazon gift card, please provide your email.", 
+                            placeholder = "email@example.com"),
+                  footer = actionButton("save_email", "Save Email")
+      )
+  )
+}, ignoreInit = TRUE)
+
+observeEvent(input$save_email, {
+  
+  user_id <- access_username()
+  contact <- tibble::tibble(
+    username = user_id,
+    email = input$email
+  )
+  saveRDS(contact, file = glue::glue("contact_{user_id}.rds"))
+  rdrop2::drop_upload(file = glue::glue("contact_{user_id}.rds"),
+                path = "/D'Agostino McGowan Data Science Lab/learnr_results/")
+  
+  removeModal()
+  showModal(modalDialog("Thank you for participating! Please close your browser window now.", footer = NULL))
+})
 
 ```

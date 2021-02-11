@@ -89,3 +89,10 @@ shiny::numericInput("ex4-3",
                     max = 100000000,
                     value = 0)
 ```
+
+```{r thanks-for-completing, echo = FALSE}
+
+actionButton(inputId = "complete_session",
+             label = "Complete Session",
+             icon = icon("check"))
+```
