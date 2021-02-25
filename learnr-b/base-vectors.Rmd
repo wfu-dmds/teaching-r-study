@@ -57,7 +57,7 @@ Additional common arithmetic functions include:
 
 #### Exercises
 
-Edit the code below to multiple vector `x` by vector `y`.
+Edit the code below to multiply vector `x` by vector `y`.
 
 ```{r vector-mult, exercise = TRUE}
 x <- c(1, 8, 6, 7)
