@@ -1,4 +1,4 @@
-## Manipulating data
+## Manipulating tidy data
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(nycflights13)
@@ -253,7 +253,7 @@ flights %>%
 
 #### Exercise
 
-Using the `flights` data, find the the flights average `distance` grouped by `year`, `origin`, `dest`, and `arr_delay`.
+Using the `flights` data, find the the flights average `distance` grouped by `year`, `origin`, `dest`, and `arr_delay`. Call this new column `mean_distance`.
 
 ```{r flights_summary, exercise = TRUE}
 
@@ -262,15 +262,13 @@ Using the `flights` data, find the the flights average `distance` grouped by `ye
 ```{r flights_summary-solution}
 flights %>% 
   group_by(year, origin, dest, arr_delay) %>% 
-  summarize(mean = mean(distance, na.rm = TRUE))
+  summarize(mean_distance = mean(distance, na.rm = TRUE))
 ```
 
 ```{r flights_summary-check}
-x <- flights %>% 
-  group_by(year, origin, dest, arr_delay) %>% 
-  summarize(mean = mean(distance, na.rm = TRUE))
-
 grade_result(
-  pass_if(~ identical(.result, x))
+  pass_if(~ identical(.result, flights %>% 
+  group_by(year, origin, dest, arr_delay) %>% 
+  summarize(mean_distance = mean(distance, na.rm = TRUE))))
 )
 ```

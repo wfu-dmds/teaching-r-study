@@ -1,9 +1,9 @@
 ## Reading data
 
-You can read data into R using `read_*()` functions. These include:
+You can read data into R using `read.*()` functions. These include:
 
-* `read_csv()`: Reads in `.csv` files by default
-* `read_delim()`: Reads in tab-delimited files by default
+* `read.csv()`: Reads in `.csv` files by default
+* `read.delim()`: Reads in tab-delimited files by default
 
 The first argument of each of these functions is the `file`, the name of the file where the data are to be read from. 
 
@@ -22,39 +22,41 @@ For example, we have a file `sleep.csv` in a folder called `data` that contains 
 ```
 
 ```{r}
-read_csv(file = "data/sleep.csv")
+read.csv(file = "data/sleep.csv")
 ```
 
 We can save this data frame to an object in R using the assignment operator, `<-`
 
 ```{r}
-sleep_data <- read_csv(file = "data/sleep.csv")
+sleep_data <- read.csv(file = "data/sleep.csv")
 ```
 
 ### Exercise
 
 Read in the csv located at `data/airquality.csv` into R.
 
-```{r, csv2-setup}
+
+```{r, csv-setup}
 tmp <- read.csv("https://raw.githubusercontent.com/wfu-dmds/teaching-r-study/master/learnr-module/data/airquality.csv")
 fs::dir_create("data")
 write.csv(tmp, "data/airquality.csv", row.names = FALSE)
 tmp <- NULL
 ```
 
-```{r csv2, exercise = TRUE}
+```{r csv, exercise = TRUE}
 
 ```
 
-```{r csv2-check}
+```{r csv-check}
 grade_result(
-  pass_if(~ identical(.result, read_csv("data/airquality.csv")))
+  pass_if(~ identical(.result, read.csv("data/airquality.csv")))
 )
 ```
 
-```{r csv2-solution}
-read_csv("data/airquality.csv")
+```{r csv-solution}
+read.csv("data/airquality.csv")
 ```
+
 
 
 

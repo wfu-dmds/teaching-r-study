@@ -29,6 +29,11 @@ grade_result(
 )
 ```
 
+```{r vector-solution}
+c(2, 4, 6, 8)
+```
+
+
 ### Vector arithmetic
 
 Arithmetic can be performed on vectors; the expressions will be applied element by element. For example, two vectors can be added using the `+`, as seen below.
@@ -72,6 +77,13 @@ grade_result(
 )
 ```
 
+```{r vector-mult-solution}
+x <- c(1, 8, 6, 7)
+y <- c(5, 3, 0, 9)
+x * y
+```
+
+
 Take the `log()` of the vector `x` below and multiply this result by `10`.
 
 ```{r vector-log, exercise = TRUE}
@@ -84,6 +96,12 @@ grade_result(
   pass_if(~ identical(.result, log(x) * 10))
 )
 ```
+
+```{r vector-log-solution}
+x <- c(1, 8, 6, 7)
+log(x) * 10
+```
+
 
 ### Logical vectors
 
@@ -124,6 +142,11 @@ grade_result(
 )
 ```
 
+```{r logical-solution}
+x <- c(8, 6, 7, 5, 3, 0, 9)
+x >= 3
+```
+
 Check whether each element of `x` is greater than 5 AND less than or equal to 7.
 
 ```{r logical-2, exercise = TRUE}
@@ -137,6 +160,12 @@ grade_result(
   pass_if(~ identical(.result, x > 5 & x <= 7))
 )
 ```
+
+```{r logical-2-solution}
+x <- c(8, 6, 7, 5, 3, 0, 9)
+x > 5 & x <= 7
+```
+
 
 ### Character vectors
 
@@ -159,6 +188,11 @@ grade_result(
   pass_if(~ identical(.result, c("apple", "banana", "pear")))
 )
 ```
+
+```{r vector-char-solution}
+c("apple", "banana", "pear")
+```
+
 
 ### Indexing vectors
 
@@ -222,18 +256,29 @@ grade_result(
 )
 ```
 
+```{r index-solution}
+x <- 1:10
+x[c(2, 4, 5)]
+```
+
+
 
 Create a vector `y` containing the values that are greater than 2 in vector `x`. 
 
 ```{r index2, exercise = TRUE}
-x <- c(1:10)
+x <- 1:10
 ```
 
 
-```{r index2-check}
+```{r index2-check, warning = FALSE}
 grade_result(
   pass_if(~identical(.result, y <- x[x>2] ))
 )
+```
+
+```{r index2-solution}
+x <- 1:10
+y <- x[x > 2]
 ```
 
 
@@ -281,6 +326,14 @@ grade_result(
 )
 ```
 
+```{r list-solution}
+x <- c(5, 1, 3)
+y <- 1
+z <- c("chickens", "roosters")
+list(x, y, z)
+```
+
+
 ### Data frames
 
 A _data frame_ is a specific type of _list_ with the class `data.frame` or `tibble`. A `tibble` is a specific subclass of `data.frame` that has a few additional restrictions. Broadly, data frames consist of _rows_ and _columns_, where the length of the _rows_ is consistent for all _columns_. For example, here is a data frame with two columns, `x` and `y`, each with three rows.
@@ -307,6 +360,12 @@ y <- c("do", "re", "mi")
 grade_result(
   pass_if(~ identical(.result, data.frame(x = x, y = y)))
 )
+```
+
+```{r dataframe-solution}
+x <- c(1, 2, 3)
+y <- c("do", "re", "mi")
+data.frame(x = x, y = y)
 ```
 
 

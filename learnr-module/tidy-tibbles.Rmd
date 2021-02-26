@@ -35,6 +35,13 @@ grade_result(
 )
 ```
 
+```{r tibble-solution}
+x <- c(1, 2, 3)
+y <- c("do", "re", "mi")
+tibble(x = x, y = y)
+```
+
+
 ### Variable classes
 
 Each column in a tibble has a specific _class_. 
@@ -126,6 +133,16 @@ y <- c(5, 3, 0)
 dat <- tibble(
   x = c(8, 6, 7),
   y = c(5, 3, 0)
+)
+```
+
+```{r assign-tib-check}
+dat <- tibble(
+  x = c(8, 6, 7),
+  y = c(5, 3, 0)
+)
+grade_result(
+  pass_if(~ identical(.result, dat))
 )
 ```
 

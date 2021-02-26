@@ -48,6 +48,11 @@ grade_result(
 )
 ```
 
+```{r filter-solution}
+subset(mtcars, hp < 100)
+```
+
+
 ### Selecting or subsetting columns
 
 To select specific columns, you can also use the `subset()` function. Instead of specifying the `subset` argument (that would filter the rows), you can specify the `select` argument to select specific columns. For example, if you want to create a data frame that only includes the `mpg` column, you can do the following:
@@ -83,6 +88,10 @@ grade_result(
 )
 ```
 
+```{r select-solution}
+mtcars_disp <- subset(mtcars, select = disp)
+```
+
 Create a new data frame called `mtcars_new` that _filters_ rows to only include rows where `wt` is less than 2 and _selects_ two columns, `wt` and `mpg`.
 
 ```{r select-2, exercise = TRUE}
@@ -94,6 +103,10 @@ mtcars_new <- subset(mtcars, subset = wt < 2, select = c(wt, mpg))
 grade_result(
   pass_if(~ identical(.result, mtcars_new))
 )
+```
+
+```{r select-2-solution}
+mtcars_new <- subset(mtcars, subset = wt < 2, select = c(wt, mpg))
 ```
 
 
@@ -135,6 +148,12 @@ grade_result(
 )
 ```
 
+```{r add-var-solution}
+df <- data.frame(x = c("a", "b", "c"))
+df$y <- c(1, 2, 3)
+df
+```
+
 ### Summarise columns in a data frame
 
 In `R`, you can use functions to summarise observations in a column of a data frame. For example, to take the average, or mean, of a column, you can use the `mean()` function and reference the data frame's column using the `$`. To take the average of the miles per gallon (`mpg`) column in the `mtcars` data frame, you would run the following:
@@ -167,6 +186,10 @@ Using the `mtcars` data, calculate the average weight (`wt`) by the transmission
 grade_result(
   pass_if(~ identical(.result, aggregate(wt ~ am, data = mtcars, FUN = mean)))
 )
+```
+
+```{r avg-solution}
+aggregate(wt ~ am, data = mtcars, FUN = mean)
 ```
 
 

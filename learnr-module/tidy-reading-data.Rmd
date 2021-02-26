@@ -1,4 +1,4 @@
-## Reading data
+## Reading tidy data
 
 You can read data into R using `read_*()` functions. These include:
 
@@ -51,6 +51,7 @@ grade_result(
   pass_if(~ identical(.result, read_csv("data/airquality.csv")))
 )
 ```
+
 
 ```{r csv2-solution}
 read_csv("data/airquality.csv")
