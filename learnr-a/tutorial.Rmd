@@ -6,32 +6,32 @@ output:
 runtime: shiny_prerendered
 ---
 
-```{r child = "../learnr-module/setup.Rmd"}
+```{r child = "setup.Rmd"}
 ```
 
-```{r child = "../learnr-module/assessment.Rmd"}
+```{r child = "assessment.Rmd"}
 ```
 
-```{r child = "../learnr-module/tidy-tibbles.Rmd"}
+```{r child = "tidy-tibbles.Rmd"}
 ```
 
-```{r child = "../learnr-module/tidy-reading-data.Rmd"}
+```{r child = "tidy-reading-data.Rmd"}
 ```
 
-```{r child = "../learnr-module/tidy-manipulating-data.Rmd"}
+```{r child = "tidy-manipulating-data.Rmd"}
 ```
 
-```{r child = "../learnr-module/assessment2.Rmd"}
+```{r child = "assessment2.Rmd"}
 ```
 
-```{r child = "../learnr-module/base-vectors.Rmd"}
+```{r child = "base-vectors.Rmd"}
 ```
 
-```{r child = "../learnr-module/base-reading-data.Rmd"}
+```{r child = "base-reading-data.Rmd"}
 ```
 
-```{r child = "../learnr-module/base-manipulating-data.Rmd"}
+```{r child = "base-manipulating-data.Rmd"}
 ```
 
-```{r child = "../learnr-module/assessment3.Rmd"}
+```{r child = "assessment3.Rmd"}
 ```

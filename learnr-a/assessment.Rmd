@@ -1,0 +1,89 @@
+## Assessment
+
+```{r, echo = FALSE}
+
+shiny::sliderInput(inputId = "r-competence-1",
+                   label = "On a scale of 1 to 10, with 1 being not competent and 10 being very competent, how competent do you think you are using the R programming language?", 
+                   min = 1, 
+                   max = 10, 
+                   value = 5, 
+                   step = 1)
+
+shiny::sliderInput(inputId = "r-master-eventually-1",
+                   label = "On a scale of 1 to 10, with 1 being very unlikely and 10 being very likely, how likely do they think it is that you will master the R language eventually?", 
+                   min = 1, 
+                   max = 10, 
+                   value = 5, 
+                   step = 1)
+
+shiny::sliderInput(inputId = "r-enjoy-learning-1",
+                   label = "On a scale of 1 to 10, with 1 being very unejoyable and 10 being very enjoyable, how much do you enjoy learning R?", 
+                   min = 1, 
+                   max = 10, 
+                   value = 5, 
+                   step = 1)
+
+```
+
+#### The following questions walk you through a short data analysis in R. Complete as many components as you can, feel free to skip any portions that you are unsure of.
+
+You have a .csv file called `txhousing.csv`.
+
+```{r, eval = FALSE}
+txhousing <- ________(file = "txhousing.csv")
+```
+
+```{r ex1, echo = FALSE}
+shiny::textInput("ex1-1", 
+                 label = "In the text box provided, fill in the blank in the code above to read this into R.")
+
+```
+
+Below is a data frame with information about the housing market in Texas.
+
+```{r}
+txhousing
+```
+
+```{r ex2, exercise = TRUE}
+txhousing
+```
+
+```{r ex2_question1, echo = FALSE}
+shiny::numericInput("ex2-1",
+                    "How many observations are in this data frame? (You can use the console above to examine the dataset)",
+                    min = 0,
+                    max = 100000000,
+                    value = 0)
+
+```
+
+```{r ex2_question2, echo = FALSE}
+shiny::numericInput("ex3-1",
+                    "How many variables are in this data frame? (You can use the console above to examine the dataset)",
+                    min = 0,
+                    max = 100000000,
+                    value = 0)
+```
+
+Use the console below to filter the `txhousing` data frame to only include sales from years after `2013`.
+
+```{r ex3, exercise = TRUE}
+
+```
+
+Use the console below to calculate the average number of sales by city.
+
+```{r ex4, exercise = TRUE}
+
+```
+
+Create a new data frame called `txhousing_summary` with two columns: `city` and `average_sales` that contains the average number of sales by city. This data frame should have one row per city.
+
+```{r ex6, echo = FALSE}
+shiny::numericInput("ex4-1",
+                    "What is the average number of sales in Austin?",
+                    min = 0,
+                    max = 100000000,
+                    value = 0)
+```

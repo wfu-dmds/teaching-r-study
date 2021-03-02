@@ -230,6 +230,11 @@ $(document).ready(function () {
 y &lt;- c(&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<div class="tutorial-exercise-support" data-label="tibble-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>x &lt;- c(1, 2, 3)
+y &lt;- c(&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;)
+tibble(x = x, y = y)</code></pre>
+</div>
 </div>
 <div id="section-variable-classes" class="section level3">
 <h3>Variable classes</h3>
@@ -420,8 +425,8 @@ df[[&quot;c&quot;]]</code></pre>
 </div>
 </div>
 </div>
-<div id="section-reading-data" class="section level2">
-<h2>Reading data</h2>
+<div id="section-reading-tidy-data" class="section level2">
+<h2>Reading tidy data</h2>
 <p>You can read data into R using <code>read_*()</code> functions. These include:</p>
 <ul>
 <li><code>read_csv()</code>: Reads in <code>.csv</code> files by default</li>
@@ -471,8 +476,8 @@ df[[&quot;c&quot;]]</code></pre>
 </div>
 </div>
 </div>
-<div id="section-manipulating-data" class="section level2">
-<h2>Manipulating data</h2>
+<div id="section-manipulating-tidy-data" class="section level2">
+<h2>Manipulating tidy data</h2>
 <!-- Adapted from Hannah's tutorial: https://github.com/hluebbering/tidyverse-manipulating-data/ -->
 <p>In this section, we’re focusing on how to use a core tidyverse package to manipulate data: <strong>the dplyr package.</strong></p>
 <p>To explore <strong>dplyr</strong>’s basic data manipulation methods, we will learn how to use the following functions:</p>
@@ -987,7 +992,7 @@ data.frame(x = x, y = y)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-reading-data-1" class="section level2">
+<div id="section-reading-data" class="section level2">
 <h2>Reading data</h2>
 <p>You can read data into R using <code>read.*()</code> functions. These include:</p>
 <ul>
@@ -1024,7 +1029,7 @@ data.frame(x = x, y = y)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-manipulating-data-1" class="section level2">
+<div id="section-manipulating-data" class="section level2">
 <h2>Manipulating data</h2>
 <p>You can manipulate data frames. In this lesson, we will learn how to:</p>
 <ul>
@@ -1134,8 +1139,9 @@ df</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="add-var-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>data.frame(x = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;),
-           y = c(1, 2, 3))</code></pre>
+<pre class="text"><code>df &lt;- data.frame(x = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+df$y &lt;- c(1, 2, 3)
+df</code></pre>
 </div>
 </div>
 </div>
@@ -1600,12 +1606,13 @@ learnr:::store_exercise_cache("tibble", list(setup = NULL, chunks = list(list(la
     opts = list(label = "\"tibble\"", exercise = "TRUE"), engine = "r")), 
     code_check = NULL, error_check = NULL, check = structure(c("x <- c(1, 2, 3)", 
     "y <- c(\"do\", \"re\", \"mi\")", "grade_result(", "  pass_if(~ identical(.result, tibble(x = x, y = y)))", 
-    ")"), chunk_opts = list(label = "tibble-check")), solution = NULL, 
-    options = list(eval = FALSE, echo = TRUE, results = "markup", 
-        tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
-        comment = NA, highlight = FALSE, strip.white = TRUE, 
-        size = "normalsize", background = "#F7F7F7", cache = 0, 
-        cache.path = "tutorial_cache/html/", cache.vars = NULL, 
+    ")"), chunk_opts = list(label = "tibble-check")), solution = structure(c("x <- c(1, 2, 3)", 
+    "y <- c(\"do\", \"re\", \"mi\")", "tibble(x = x, y = y)"), chunk_opts = list(
+        label = "tibble-solution")), options = list(eval = FALSE, 
+        echo = TRUE, results = "markup", tidy = FALSE, tidy.opts = NULL, 
+        collapse = FALSE, prompt = FALSE, comment = NA, highlight = FALSE, 
+        strip.white = TRUE, size = "normalsize", background = "#F7F7F7", 
+        cache = 0, cache.path = "tutorial_cache/html/", cache.vars = NULL, 
         cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
         cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
         fig.align = "default", fig.path = "tutorial_files/figure-html/", 
@@ -1626,19 +1633,19 @@ learnr:::store_exercise_cache("tibble", list(setup = NULL, chunks = list(list(la
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "tib-type1", question = structure("<strong>In the tibble ablove, what is the class for variable <code>a<\u002fcode><\u002fstrong>", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_f92c3e5", 
+"character")), answers = list(structure(list(id = "lnr_ans_a208ee3", 
     option = "double", value = "double", label = structure("double", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_db7ad3c", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_95dea51", 
     option = "intever", value = "intever", label = structure("intever", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d9dc578", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_59629ef", 
     option = "logical", value = "logical", label = structure("logical", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5ae0bfb", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_18477fe", 
     option = "character", value = "character", label = structure("character", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_a584f46", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d17e95", 
     option = "list", value = "list", label = structure("list", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1649,25 +1656,25 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "tib-type1-answer", question = "tib-type1"), loading = structure("<strong>Loading:<\u002fstrong> \n<strong>In the tibble ablove, what is the class for variable <code>a<\u002fcode><\u002fstrong>\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 1909541429.1108, options = list()), class = c("learnr_radio", 
+    seed = 1929851014.60134, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "tib-type2", question = structure("<strong>In the tibble ablove, what is the class for variable <code>b<\u002fcode><\u002fstrong>", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_ad89742", 
+"character")), answers = list(structure(list(id = "lnr_ans_438ca1c", 
     option = "double", value = "double", label = structure("double", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_beefc3c", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_230f3b1", 
     option = "intever", value = "intever", label = structure("intever", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_c57551c", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_64b6fd6", 
     option = "logical", value = "logical", label = structure("logical", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b3a5da0", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_a662ecb", 
     option = "character", value = "character", label = structure("character", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_2dba08b", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_71edd07", 
     option = "list", value = "list", label = structure("list", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1678,25 +1685,25 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "tib-type2-answer", question = "tib-type2"), loading = structure("<strong>Loading:<\u002fstrong> \n<strong>In the tibble ablove, what is the class for variable <code>b<\u002fcode><\u002fstrong>\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 410873101.808672, options = list()), class = c("learnr_radio", 
+    seed = 2125496301.51024, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "tib-type3", question = structure("<strong>In the tibble ablove, what is the class for variable <code>c<\u002fcode><\u002fstrong>", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_4e39dea", 
+"character")), answers = list(structure(list(id = "lnr_ans_d2133cd", 
     option = "double", value = "double", label = structure("double", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ccd5048", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_be442fc", 
     option = "intever", value = "intever", label = structure("intever", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_fce298d", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8e5f88f", 
     option = "logical", value = "logical", label = structure("logical", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_93bd2db", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_4f5affb", 
     option = "character", value = "character", label = structure("character", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b6c86f0", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_70b0285", 
     option = "list", value = "list", label = structure("list", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1707,7 +1714,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "tib-type3-answer", question = "tib-type3"), loading = structure("<strong>Loading:<\u002fstrong> \n<strong>In the tibble ablove, what is the class for variable <code>c<\u002fcode><\u002fstrong>\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 800574992.627203, options = list()), class = c("learnr_radio", 
+    seed = 490505698.27159, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -2740,8 +2747,8 @@ learnr:::store_exercise_cache("add-var", list(setup = NULL, chunks = list(list(l
     code_check = NULL, error_check = NULL, check = structure(c("grade_result(", 
     "  pass_if(~ identical(.result, data.frame(x = c(\"a\", \"b\", \"c\"),", 
     "                                          y = c(1, 2, 3))))", 
-    ")"), chunk_opts = list(label = "add-var-check")), solution = structure(c("data.frame(x = c(\"a\", \"b\", \"c\"),", 
-    "           y = c(1, 2, 3))"), chunk_opts = list(label = "add-var-solution")), 
+    ")"), chunk_opts = list(label = "add-var-check")), solution = structure(c("df <- data.frame(x = c(\"a\", \"b\", \"c\"))", 
+    "df$y <- c(1, 2, 3)", "df"), chunk_opts = list(label = "add-var-solution")), 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
         comment = NA, highlight = FALSE, strip.white = TRUE, 
