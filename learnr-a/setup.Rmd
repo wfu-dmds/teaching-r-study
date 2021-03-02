@@ -35,9 +35,11 @@ tutorial_event_recorder <- function(username) {
   recorder <- function(tutorial_id, tutorial_version, user_id,
                        event, data) {
     if (rdrop2::drop_exists(glue::glue("/D'Agostino McGowan Data Science Lab/learnr_results/data_{username}.rds"))) {
+      if (!file.exists(glue::glue("data_{username}.rds"))) {
       rdrop2::drop_download(path = glue::glue("/D'Agostino McGowan Data Science Lab/learnr_results/data_{username}.rds"),
                     local_path = glue::glue("data_{username}.rds"),
                     overwrite = TRUE)
+      }
       t <- readRDS(glue::glue("data_{username}.rds"))
     } else {
       t <- tibble::tibble(
