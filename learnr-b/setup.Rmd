@@ -28,10 +28,8 @@ access_username <- function() {
   return(user_id)
 }
 
-# Setup how the async is run
-future::plan("multisession")
-
 tutorial_event_recorder <- function(username) {
+  
   recorder <- function(tutorial_id, tutorial_version, user_id, event, data) {
     current_time <- Sys.time()
     event_info <- tibble::tibble(
@@ -49,13 +47,9 @@ tutorial_event_recorder <- function(username) {
     # Unlink file to avoid filling up disk
     on.exit(unlink(file_name), add = TRUE)
     
-    # Run the dropbox upload as an async promise so it doesn't block the main
-    # thread and slow things down
-    promises::future_promise({
-      rdrop2::drop_upload(file = file_name,
-                          autorename = TRUE, # Just incase default changes make sure conflicts arent swallowed
-                          path = "/D'Agostino McGowan Data Science Lab/learnr_results/")
-    })
+    rdrop2::drop_upload(file = file_name,
+                        autorename = TRUE, # Just incase default changes make sure conflicts arent swallowed
+                        path = glue::glue("/D'Agostino McGowan Data Science Lab/learnr_results/all_events"))
   }
   recorder
 }
