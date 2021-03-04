@@ -66,9 +66,9 @@ server <- function(input, output, session) {
     
     # Send to appropriate learnr modules
     if (grepl("_GA", input$userID)) {
-      shinyjs::js$openExperiment(paste0("https://wfudatasciencelab.shinyapps.io/learnr-a/?user_id=", input$userID, "/"))
+      shinyjs::js$openExperiment(paste0("https://lucy.shinyapps.io/learnr-a/?user_id=", input$userID, "/"))
     } else if (grepl("_GB", input$userID)) {
-      shinyjs::js$openExperiment(paste0("https://wfudatasciencelab.shinyapps.io/learnr-b/?user_id=", input$userID, "/"))
+      shinyjs::js$openExperiment(paste0("https://lucy.shinyapps.io/learnr-b/?user_id=", input$userID, "/"))
     }
     
   })
