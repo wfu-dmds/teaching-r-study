@@ -26,3 +26,12 @@ d <- map_df(files$path_lower, f)
 d <- d %>%
   pivot_wider(names_from = question, values_from= response)
 
+d2 <- d %>%
+  group_by(username) %>%
+  add_count(username) %>%
+  filter(n==2) %>%
+  select(-n) %>%
+  arrange(username)
+
+
+  
