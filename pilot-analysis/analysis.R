@@ -33,5 +33,23 @@ d2 <- d %>%
   select(-n) %>%
   arrange(username)
 
+## Pull contact information for those that completed
 
+files <- drop_dir("/D'Agostino McGowan Data Science Lab/learnr_results/")
+
+files <- files %>%
+  filter(grepl("contact", name))
+
+f <- function(path) {
+  drop_download(path, local_path = "temp.rds", overwrite = TRUE)
+  d <- readRDS("temp.rds")
+  d$user_info <- path
+  d
+}
+
+d <- map_df(files$path_lower, f)
+
+emails <- d$email
+
+emails
   
