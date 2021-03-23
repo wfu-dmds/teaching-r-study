@@ -33,5 +33,7 @@ d2 <- d %>%
   select(-n) %>%
   arrange(username)
 
+dA <- filter(d2, grepl("GA",username))
 
-  
+dB <- filter(d2, grepl("GB",username))
+
